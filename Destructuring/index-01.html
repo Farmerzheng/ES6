@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  var arr = [1, 2, 3]
+  var [first, second, third] = arr;
+  console.log(first, second, third);
+
+  var [foo, [
+    [bar], baz
+  ]] = [1, [
+    [2], 3
+  ]]
+  console.log(foo);
+  // 1
+  console.log(bar);
+  // 2
+  console.log(baz);
+  // 3
+
+  var [, , third] = ["foo", "bar", "baz"];
+  console.log(third);
+  // "baz"
+
+  var [head, ...tail] = [1, 2, 3, 4];
+  console.log(tail);
+  // [2, 3, 4]
+  </script>
+</body>
+
+</html>

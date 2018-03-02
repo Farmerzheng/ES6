@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>对象解构的应用</title>
+</head>
+
+<body>
+  <script>
+  var obj = {
+    name: "f22",
+    speed: 1000,
+    color: "gray"
+  }   
+   //利用对象解构，巧妙的改变了函数的形参
+  function Plane({name,speed,color}) {
+  	// obj.name 、 obj.speed 、obj.color 麻不麻烦
+    this.name = name;
+    this.speed = speed;
+    this.color = color;
+  }
+
+  // 函数调用的时候，实参的值传给形参
+  // {name,speed,color} = obj
+
+  var my = new Plane(obj);
+  console.log(my);
+
+
+  </script>
+</body>
+
+</html>

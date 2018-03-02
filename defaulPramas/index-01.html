@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// ES5
+		// function person(name,age){
+  //         name = name || 30;
+  //         age = age || "zhangsan"
+		// }
+		// ES6
+		function person(name=30,age="zhangsan"){
+           console.log(name,age)
+		}
+		person();
+		person(50,"lisi")
+	</script>
+</body>
+</html>

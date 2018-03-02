@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  /* 如果不传入参数，我们让创建出来的对象的
+     name 的默认属性是 "lisi"  age的默认属性是 10
+     */
+  // function Person(name, age) {
+  // 	// ES5 函数当中默认参数的书写形式
+  //   this.name = name || "lisi";
+  //   this.age = age || 10
+
+  // }
+
+  // var zhangsan = new Person();
+  // console.log(zhangsan);
+  
+  // ES6 函数当中默认参数的书写形式
+  // ES6当中默认参数直接写在了函数的形参内
+  // 形参变量 = 默认参数
+  
+   function Person(name="lisi",age=10){
+      this.name = name;
+      this.age = age;
+   }
+
+   var zhangsan = new Person();
+   console.log(zhangsan)
+
+
+
+  </script>
+</body>
+
+</html>

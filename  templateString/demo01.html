@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="../jquery-1.10.1.min.js"></script>
+</head>
+
+<body>
+  <p id="result"></p>
+  <script>
+  var zhangsan = { name: "zhangsan", age: 18 }
+
+  // $("#result").append(
+  //  // 向字符串中插入变量，采取字符串连接的方式
+  //    "张三的名字是" + 
+  //    zhangsan.name+
+  //    ","+
+  //    "年龄是"+
+  //    zhangsan.age
+  //  )  
+
+  // 模板字符串
+
+  // $("#result").append(
+  //   // 没有"" ,  变量与字符串之间没有 "+"
+  //   // 变量用${}包裹起来 ， 字符串最外面用``包裹
+  //   `张三的名字是${zhangsan.name},年龄是${zhangsan.age}`
+  // )
+
+  // 在${}中的大括号里可以放入任意的JavaScript表达式，
+
+  $("#result").append(
+    // 没有"" ,  变量与字符串之间没有 "+"
+    // 变量用${}包裹起来 ， 字符串最外面用``包裹
+    `张三的名字是${zhangsan.name+zhangsan.age},年龄是${zhangsan.age+18}`
+  )
+
+  // 有了模板字符串，字符串与变量之间的连接变得简单了
+
+  </script>
+</body>
+
+</html>

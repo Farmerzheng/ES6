@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>plane</title>
+</head>
+<style>
+.game_bg {
+  width: 320px;
+  height: 568px;
+  background-image: url(image/background.png);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  overflow: hidden;
+}
+</style>
+
+<body>
+  <div class="game_bg">
+  </div>
+  <script>
+  var HitTest = function() {}
+  /*
+    test :  判断两个DOM对象是否相撞
+    Pramas:
+          enemy: 敌方飞机
+          bullet: 子弹
+          my:我方飞机
+  */
+  HitTest.test = function(enemy, bullet) {
+    // 获取到enemy 、 bullet 的位置
+
+     var enemyRect = enemy.getBoundingClientRect(); 
+     console.log(enemy,enemyRect)
+     // var bulletRect = bullet.getBoundingClientRect();
+
+     // if(bulletRect.right>enemyRect.left&&bulletRect.left<enemyRect.right&&bulletRect.top<enemyRect.bottom){
+     //  return true;
+     // }
+
+     // return false;
+
+
+  }
+
+
+  // 飞机的大小
+  var mySizeObj = { width: 66, height: 80 }
+  var enenmySizeObj_1 = { width: 34, height: 24 };
+  var enenmySizeObj_2 = { width: 46, height: 60 };
+  var enenmySizeObj_3 = { width: 110, height: 164 };
+
+  var game_bg = document.querySelector(".game_bg");
+
+  // 随机函数（地方飞机的位置是随机的）
+  function randomFn(min, max) {
+    return parseInt(Math.random() * (max - min)) + min;
+  }
+
+
+  /* 
+     Plane:原型飞机类（生产飞机）
+     sizeObj:飞机的大小  {width:100,height:1000}
+     planeBg : 飞机的背景图片  "image/1.gif"
+     planePosition:飞机的位置  {x:100,y:100}
+  */
+  function Plane(sizeObj, planeBg, planePosition) {
+    // 如果没有传入、sizeObj，我们就用默认的大小
+    sizeObj = sizeObj || { width: 66, height: 80 }
+    // 如果没有传入planePosition,我们用默认大小
+    planePosition = planePosition || { x: 127, y: 488 }
+    //如果没有传入背景图片，默认图片是"mg.gif"
+    planeBg = planeBg || "image/my.gif";
+
+    // 将传入的参数作为new出来的对象的属性
+    this.width = sizeObj.width;
+    this.height = sizeObj.height;
+    this.x = planePosition.x;
+    this.y = planePosition.y;
+    this.bg = planeBg;
+
+    //不应该在构造方法当中init()(初始化)
+
+    // MyPlane.prototype = new Plane();
+    // EnemyPlane.prototype = new Plane();
+    // 类继承的时候会创建对象，创建对象的时候会调用构造函数，就会调用初始化方法
+    // 这样就向页面当中添加了原始的飞机
+
+    // 不要的构造函数当中初始化对象（尽量创建对象以后再初始化）
+    // this.init();
+  }
+  //对象的方法要写在原型对象上面 
+  Plane.prototype = {
+    init: function() {
+      this.createPlane();
+    },
+    createPlane: function() {
+      this.body = document.createElement("div");
+      this.body.style.width = this.width + "px";
+      this.body.style.height = this.height + "px";
+      this.body.style.backgroundImage = "url(" + this.bg + ")";
+      this.body.style.position = "absolute";
+      this.body.style.left = this.x + "px";
+      this.body.style.top = this.y + "px";
+      game_bg.appendChild(this.body);
+    }
+  }
+
+
+  // 让 MyPlane 和 EnemyPlane 继承Plane
+  // ES5当中类的继承(让构造函数的prototype属性指向要继承的对象)
+  MyPlane.prototype = new Plane();
+  EnemyPlane.prototype = new Plane();
+
+  function EnemyPlane(sizeObj, planeBg, planePosition, speed) {
+    sizeObj = sizeObj || { width: 66, height: 80 }
+    planePosition = planePosition || { x: 127, y: 488 }
+    planeBg = planeBg || "image/my.gif";
+    this.width = sizeObj.width;
+    this.height = sizeObj.height;
+    this.x = planePosition.x;
+    this.y = planePosition.y;
+    this.bg = planeBg;
+    this.speed = speed;
+    // this.init();
+    // console.log(this);
+  }
+
+  EnemyPlane.prototype.update = function() {
+    // console.log(this,this.body)
+    this.body.style.top = this.body.offsetTop + this.speed + "px";
+  }
+
+
+  function MyPlane(sizeObj, planeBg, planePosition) {
+    // 构造函数当中的属性不能从Plane当中继承，所以要自己实现
+    sizeObj = sizeObj || { width: 66, height: 80 }
+    planePosition = planePosition || { x: 127, y: 488 }
+    planeBg = planeBg || "image/my.gif";
+    this.width = sizeObj.width;
+    this.height = sizeObj.height;
+    this.x = planePosition.x;
+    this.y = planePosition.y;
+    this.bg = planeBg;
+    this.keyDown();
+  }
+
+  MyPlane.prototype.keyDown = function() {
+    var direction = { left: false, right: false }
+    setInterval(function() {
+      // 更新飞机的左右位置
+      if (direction.left) {
+        if (this.body.offsetLeft <= 0) return;
+        // 左移动
+        this.body.style.left = this.body.offsetLeft - 2 + "px";
+
+      } else if (direction.right) {
+        if (this.body.offsetLeft >= (320 - this.body.offsetWidth)) return;
+        this.body.style.left = this.body.offsetLeft + 2 + "px";
+      }
+
+
+    }.bind(this), 20);
+    document.onkeydown = function(e) {
+      var e = e || event;
+      var code = e.keyCode || e.which || e.charCode;
+
+      // 判断用户按下的是哪个键
+      switch (code) {
+        case 37:
+          direction.left = true;
+          direction.right = false;
+          break;
+        case 39:
+          direction.right = true;
+          direction.left = false;
+          break;
+      }
+    }
+  }
+
+  // 创建我方飞机
+  var myPlane = new MyPlane();
+  myPlane.init();
+
+  // 创建敌方飞机（三种类型）
+
+  // 创建敌方飞机的属性数组
+  var enemyPlanePropertyArr = [{
+      size: enenmySizeObj_1,
+      bg: "image/enemy_fly_1.png",
+      speed: 5
+    },
+    {
+      size: enenmySizeObj_2,
+      bg: "image/enemy_fly_2.png",
+      speed: 3
+    },
+    {
+      size: enenmySizeObj_3,
+      bg: "image/enemy_fly_3.png",
+      speed: 1
+    }
+  ]
+
+
+
+
+
+  // 1、子弹添加到我方飞机上 ----> 如何判断子弹与敌方飞机的位置关系？
+  // 2、子弹添加到游戏屏幕上 ----> 时刻监听我方飞机的头部位置？  
+
+  // 创建子弹类
+  function Bullet(bulletSize, bulletBg, bulletContainer, bulletPos) {
+
+    bulletBg = bulletBg || "image/bullet1.png";
+    bulletSize = bulletSize || { width: 6, height: 14 }
+
+    this.bulletSize = bulletSize;
+    this.bulletBg = bulletBg;
+    this.bulletContainer = bulletContainer;
+    this.bulletPos = bulletPos;
+  }
+
+  Bullet.prototype = {
+    init: function() {
+      this.createBullet();
+    },
+    createBullet: function() {
+      this.body = document.createElement("div");
+      this.body.className = "bullet";
+      this.body.style.width = this.bulletSize.width + "px";
+      this.body.style.height = this.bulletSize.height + "px";
+      this.body.style.backgroundImage = "url(" + this.bulletBg + ")";
+      this.body.style.position = "absolute";
+      // 我方飞机的left加上我方飞机宽度的一半减去子弹宽度的一半
+      this.body.style.left = this.bulletPos.left + "px";
+      this.body.style.top = this.bulletPos.top + "px";
+      this.bulletContainer = this.bulletContainer;
+      this.bulletContainer.appendChild(this.body);
+    },
+    update: function() {
+      this.body.style.top = this.body.offsetTop - 20 + "px";
+    }
+  }
+
+
+
+
+
+
+  // 不同敌机的运动速度不一样？
+  // 飞机的速度能不能通过参数的形式传入？
+
+  // 不同敌机的生命值不一样
+  // 击中不同飞机的得分不一样
+  // 不同敌机出现的频率也不一样
+
+
+  var bulletArr = [];
+  var bulletDuration = 0;
+  var enemyArr = [];
+
+  setInterval(function() {
+    // 子弹更新的时间（可能是50ms） 与 子弹创建的时间间隔（可能是2s）不匹配
+    // 创建子弹
+
+    bulletDuration++;
+    if (bulletDuration % 10 === 0) {
+      // 子弹的位置在创建子弹的时候通过参数传入（因为子弹的位置是动态随着飞机的位置而变化的，创建子弹的时候我们能够获取到飞机的位置，从而能够计算出子弹的位置）
+      var bulletLeft = myPlane.body.offsetLeft + myPlane.body.offsetWidth / 2 - 3;
+
+      var bullet = new Bullet({ width: 6, height: 14 }, "image/bullet1.png", game_bg, { left: bulletLeft, top: myPlane.body.offsetTop });
+      bullet.init();
+      //将子弹保存在数组当中，以防函数运行完成后子弹销毁
+      bulletArr.push(bullet);
+
+      //移除子弹的频率等于创建子弹的频率，所以移除子弹的代码应该写在这里
+
+      for (var i = 0; i < bulletArr.length; i++) {
+        // 子弹移除的条件
+        if (bulletArr[i].body.offsetTop + bulletArr[i].body.offsetHeight < 0) {
+          // 移除文档流当中的子弹
+          game_bg.removeChild(bulletArr[i].body);
+
+          //移除数组中的子弹对象
+
+          // arr.splice(index,howmany,elements)
+          // index:删除的位置
+          // howmany:删除指定数量的元素
+          // elements:插入的元素
+
+          bulletArr.splice(i, 1);
+
+        }
+      }
+
+      // console.log(bulletArr.length)
+    }
+
+
+    // 让子弹运动
+    for (var i = 0; i < bulletArr.length; i++) {
+      // 防止内存泄漏，移除子弹 
+
+      bulletArr[i].update();
+    }
+
+
+
+    if (bulletDuration % 20 === 0) {
+      // 1s 生成一个小飞机
+      // 5s生成一个中飞机
+      // 10s生成一个大飞机
+
+      // 随机生成一个敌机属性
+      var randomPlaneProperty = enemyPlanePropertyArr[0];
+
+      if (bulletDuration % 100 === 0) {
+        randomPlaneProperty = enemyPlanePropertyArr[1];
+      }
+
+      if (bulletDuration % 200 === 0) {
+        randomPlaneProperty = enemyPlanePropertyArr[2];
+      }
+
+
+
+      // 利用敌机的属性创建飞机
+      var enemyPlane = new EnemyPlane(randomPlaneProperty.size, randomPlaneProperty.bg, { x: randomFn(0, 320 - randomPlaneProperty.size.width), y: 0 }, randomPlaneProperty.speed);
+
+      enemyPlane.init();
+
+      enemyArr.push(enemyPlane);
+
+      // 敌机飞出界面销毁敌机
+
+      for (var i = 0; i < enemyArr.length; i++) {
+        // 子弹移除的条件
+        if (enemyArr[i].body.offsetTop > 568) {
+          // 移除文档流当中的子弹
+          game_bg.removeChild(enemyArr[i].body);
+          //移除数组中的敌机对象
+          enemyArr.splice(i, 1);
+
+        }
+      }
+
+      // console.log(enemyArr.length)
+    }
+
+    // 敌机运动
+    for (var i = 0; i < enemyArr.length; i++) {
+      enemyArr[i].update();
+    }
+
+
+    // 碰撞检测
+    // HitTest.test(enemy, bullet) 
+     var hitBoolean = false;
+    for(var i = 0 ; i < bulletArr.length ; i++){
+
+      var bullet = bulletArr[i];
+
+      for(var j = 0 ; j < enemyArr.length ; j++){
+         
+         hitBoolean =  HitTest.test(enemyArr[j], bullet) ;
+      }
+
+    }
+
+    // console.log(hitBoolean);
+
+
+
+  }, 50)
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

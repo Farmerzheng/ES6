@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  var robotA = { name: "Bender" };
+  var robotB = { name: "Flexo" };
+  var { name: nameA } = robotA;
+  var { name: nameB } = robotB;
+  console.log(nameA);
+  // "Bender"
+  console.log(nameB);
+  // "Flexo"
+
+  // 当属性名与变量名一致时，可以通过一种实用的句法简写：
+
+
+  var { foo, bar } = { foo: "lorem", bar: "ipsum" };
+  console.log(foo);
+  // "lorem"
+  console.log(bar);
+  // "ipsum"
+
+  // 与数组解构一样，你可以随意嵌套并进一步组合对象解构：
+
+  var complicatedObj = {
+    arrayProp: [
+      "Zapp",
+      { second: "Brannigan" }
+    ]
+  };
+  var { arrayProp: [first, { second }] } = complicatedObj;
+  console.log(first);
+  // "Zapp"
+  console.log(second);
+  // "Brannigan"
+
+  // 当你解构一个未定义的属性时,得到的值为undefined：
+
+  var { missing } = {};
+  console.log(missing);
+  // undefined
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+
+</head>
+<body>
+<script>
+    // ES6 标准并不是所有的浏览器都支持，如果想要用ES6进行开发，那么我们需要将
+    // ES6的代码转化成ES5 , babel 能够将ES6的代码转化成ES5
+
+	// const 是ES6当中的一个关键字
+	// 这个关键字的作用是用来声明常量用的
+	// 代表常量的单词习惯上大写
+	// 能用const声明就不用let 和 var 
+	const PI = 3.1415926;
+
+	const WIDTH = window.innerWidth;
+	const HEIGHT = window.innerHeight;
+
+
+
+	console.log(WIDTH,HEIGHT);
+
+    // const关键字声明的是常量，这个常量一旦赋值就不能改变，不能再次赋值
+    // 当你确定一个值不会改变的时候你就用const
+	// PI  = 1;//Assignment to constant variable.
+
+
+	const URL = "http://baidu.com";
+    
+    // 所有得网络请求都需要"http://baidu.com"
+
+    // 项目上线的时候域名更改了"http://sohu.com"
+
+
+	console.log(PI);
+
+</script>
+</body>
+</html>

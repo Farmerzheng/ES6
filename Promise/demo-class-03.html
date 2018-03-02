@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>promise</title>
+</head>
+
+<body>
+  <script>
+
+  // promise是一个对象(ES6新增的)
+
+  /*  
+    promise 对象有三种状态  
+    pending  (进行中)
+    resolved (完成的状态）
+    rejected (未完成状态）
+    promise 状态改变,会调用一个函数，函数在哪？在promise.then() 方法当中 
+
+    */
+
+ 
+/*  
+     创建promise对象的时候我们需要传入一个函数，
+     此函数使我们能够改变promise状态
+     因为函数里面提供了两个形参，而且形参是函数
+     通过调用形参，就改变了promise状态
+
+  */
+  var promise = new Promise((resolve, reject) => {
+
+    // resolve和reject 是两个形参，形参的类型是函数
+
+    if ( /*条件满足*/ ) {
+      // 将pomise 对象由pending状态转为resolved状态
+      resolve();
+    } else {
+      // 将pomise 对象由pending状态转为rejected状态
+      reject();
+    }
+
+  });
+
+  /*
+     我們如何监听promise的状态改变
+     在promise.then()方法就可以监听到
+  */
+
+  promise.then(()=>{
+   //pending--->resolved 回调函数
+  },()=>{
+    //pending--->rejected 回调函数
+  })
+
+  /*
+   回调函数逻辑：  条件满足 ---- > 执行回调函数
+   promise逻辑： 
+        条件满足 ----->
+        改变promise状态 --->
+        promise.then里面的回调函数与就会执行
+        */ 
+  </script>
+</body>
+
+</html>

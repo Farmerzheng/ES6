@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  const getJSON = (url) => {
+    return new Promise(function(resolve, reject) {
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url);
+      xhr.onreadystatechange = function() {
+        if (this.readyState !== 4) {
+          return;
+        }
+        if (this.status === 200) {
+          // 将promise的状态改为resolved
+          resolve(this.response);
+        } else {
+          // 将promise的状态改成rejected
+          reject(new Error(this.statusText));
+        }
+      };
+      xhr.send();
+    })
+
+  };
+
+
+  getJSON("/post.json").then(function(json) {
+    console.log('Contents: ' + json);
+  }, function(error) {
+    console.error('出错了', error);
+  });
+
+  // 启动本地服务器 
+  // 安装browser-sync
+  // npm install -g browser-sync
+  // 启动服务器下的某个文件
+  // browser-sync start --server --files "./demo07.html"
+  </script>
+</body>
+
+</html>

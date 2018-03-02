@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <p id="test"></p>
+  <script>
+  // Promise.prototype.then()
+  // Promise实例具有then方法，也就是说，then方法是定义在原型对象Promise.prototype上的。它的作用是为Promise实例添加状态改变时的回调函数。
+
+  // then方法返回的是一个新的Promise实例(注意，不是原来那个Promise实例)。因此可以采用链式写法，即then方法后面再调用另一个then方法。
+
+  // Promise.prototype.catch方法是.then(null,rejeaction)的别名，用于指定发生错误时的回调函数。
+
+  var logging = document.getElementById('test');
+
+  function log(s) {
+    var p = document.createElement('p');
+    p.innerHTML = s;
+    logging.appendChild(p);
+  }
+
+  // 0.5秒后返回input*input的计算结果:
+  function multiply(input) {
+    return new Promise(function(resolve, reject) {
+      log('calculating ' + input + ' x ' + input + '...');
+      setTimeout(resolve, 500, input * input);
+    });
+  }
+
+  // 0.5秒后返回input+input的计算结果:
+  function add(input) {
+    return new Promise(function(resolve, reject) {
+      log('calculating ' + input + ' + ' + input + '...');
+      setTimeout(resolve, 500, input + input);
+    });
+  }
+
+  // promise对象创建后会立即执行
+  var p = new Promise(function(resolve, reject) {
+    log('start new Promise...');
+    resolve(2);
+  });
+
+  p.then(multiply)
+    .then(add)
+    .then(multiply)
+    .then(add)
+    .then(function(result) {
+      log('Got value: ' + result);
+    });
+  </script>
+</body>
+
+</html>

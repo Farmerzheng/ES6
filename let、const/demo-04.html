@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>按钮1</button>
+  <button>按钮2</button>
+  <button>按钮3</button>
+  <button>按钮4</button>
+  <button>按钮5</button>
+  <script>
+  var buttonArr = document.querySelectorAll("button");
+
+  // 需求：点击按钮分别打印出 0 1 2 3 4  
+
+  //ES5的实现方式
+  // for (var i = 0; i < buttonArr.length; i++) {
+  //      buttonArr[i].addEventListener("click",
+
+  // 	          (function (a){
+  //                        // 函数和它的执行环境（局部变量）
+  // 	             return function (){
+  // 	               console.log(a);
+  // 	             }
+
+  // 	          })(i)
+  //         )      
+  // }
+
+  // ES6实现方式
+  for (let i = 0; i < buttonArr.length; i++) {
+  	console.log(i);
+     buttonArr[i].addEventListener("click",function(){
+         console.log(i)
+     } )
+  }
+
+
+  // 第一次
+  {
+    let i = 0;
+    buttonArr[i].addEventListener("click", function() {
+      console.log(i)
+    })
+  }
+   // 第二次
+  {
+    let i = 1;
+    buttonArr[i].addEventListener("click", function() {
+      console.log(i)
+    })
+  }
+   // 第三次
+  {
+    let i = 2;
+    buttonArr[i].addEventListener("click",function() {
+      console.log(i)
+    })
+  }
+  // 第四次
+  {
+    let i = 3;
+    buttonArr[i].addEventListener("click", function() {
+      console.log(i)
+    })
+  }
+  // 第五次
+  {
+    let i = 4;
+    buttonArr[i].addEventListener("click", function() {
+      console.log(i)
+    })
+  }
+  </script>
+</body>
+
+</html>

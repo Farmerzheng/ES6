@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  if (true) {
+    var c = 3;
+  }
+  // c变量在大括号外能够访问到么？ ---->能够访问到
+  
+  //console.log(c);//3
+
+
+  for (var i = 0; i < 100; i++) {
+    // i 在这里能够访问到
+  }
+  // i 能够访问到么？能够访问到！！！
+  console.log(i); //100
+
+
+  // 用var关键字声明的变量 在  代码块（{}）外能够访问到
+
+  // ES5当中没有块作用域，只有函数作用域和全局作用域
+
+
+
+  </script>
+</body>
+
+</html>

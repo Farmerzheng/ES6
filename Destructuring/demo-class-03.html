@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  var zhangsan = { name: "zhangsan", age: 18 }
+  // var {name:nameA,age:ageA} = zhangsan;
+  // 当变量名和属性名相同时，可以省略属性名
+  var { name, age } = zhangsan;
+  console.log(name, age);
+  var fruit = {
+    apple: {
+      name: "apple"
+    },
+    banana: {
+      name: "banana"
+    },
+    orange: {
+      name: "orange"
+    }
+  }
+
+  var { apple, banana, orange } = fruit;
+  console.log(apple, banana, orange);
+  </script>
+</body>
+
+</html>

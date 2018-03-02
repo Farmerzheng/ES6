@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  // 创建Plane类
+  class Plane {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age
+    }
+    run() {
+      console.log(this.name + " can run")
+    }
+  }
+
+  //创建EnemyPlane类，并继承Plane类的方法和属性（需用extends关键字指明被继承的类）
+  class EnemyPlane extends Plane {
+    // extends ES6当中的关键字（含义是扩展的意思）  
+    constructor(name, age) {
+      // 继承的类(EnemyPlane）需要在constructor方法当中调用super方法
+      super(name, age);
+    }
+
+
+  }
+
+  var enemyOne = new EnemyPlane("enemyOne", 18);
+  
+  // enemyOne是由EnemyPlane这个类创建的
+  // EnemyPlane类继承自Plane类
+  // enemyOne就拥有了Plane类的方法
+
+  enemyOne.run();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  // 如果要返回一个对象，就要注意，如果是单表达式，这么写的话会报错：
+
+  // SyntaxError:
+  x => { foo: x }
+  // 因为和函数体的{ ... }有语法冲突，所以要改为：
+
+  // ok:
+  x => ({ foo: x })
+  </script>
+</body>
+
+</html>

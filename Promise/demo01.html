@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+   // 进程与线程
+
+   
+
+  // 在JavaScript的世界中，所有代码都是单线程执行的。
+
+  // 由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行。异步执行可以用回调函数实现
+
+  // 相信凡是写过javascript的童鞋也一定都写过回调方法（ callback）， 简单说回调方法就是将一个函数func2作为参数传入另一个函数func1中， 当func1执行到某一步或者满足某种条件的时候才执行传入的参数func2， 例如下面的代码段
+
+  //当参数a大于10且参数func2是一个方法时 执行func2
+  var func1 = (a, func2) {
+    if (a > 10 && typeof func2 == 'function') {
+      func2()
+    }
+  }
+
+  func1(11, function() {
+    console.log('this is a callback')
+  })
+  </script>
+</body>
+
+</html>

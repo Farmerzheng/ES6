@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  // 箭头函数有两种格式， 一种像上面的， 只包含一个表达式， 连 { } 和return都省略掉了。 还有一种可以包含多条语句， 这时候就不能省略 { } 和return：
+
+  x => {
+    if (x > 0) {
+      return x * x;
+    } else {
+      return -x * x;
+    }
+  }
+  // 如果参数不是一个， 就需要用括号() 括起来：
+
+  // 两个参数:
+  (x, y) => x * x + y * y
+
+  // 无参数:
+  () => 3.14
+  </script>
+</body>
+
+</html>

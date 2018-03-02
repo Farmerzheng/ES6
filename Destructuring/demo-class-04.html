@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+     
+       // 深层次的解构
+
+		var zhangsan = {
+			name:"zhangsan",
+			friend:{
+				name:"lisi",
+				age:20
+			}
+		}
+        // 当变量名和属性名相同的时候，可以简写
+		var {name:nameA,friend:{name:nameB,age}} = zhangsan;
+
+		console.log(nameA,nameB,age);
+		console.log(zhangsan.name,
+			        zhangsan.friend.name,
+			        zhangsan.friend.age
+			    );
+	</script>
+</body>
+</html>
