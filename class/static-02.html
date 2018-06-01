@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ES6中的静态方法 用关键字 static
+
+        class Person {
+            // 类的构造方法
+            constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+                // 添加一个静态方法eat
+            static eat() {
+                console.log('eat')
+            }
+
+            // 添加一个动态方法speak
+            speak() {
+                console.log('speak')
+            }
+        }
+
+        // 调用eat方法
+        Person.eat(); //eat
+
+        // 调用speak方法
+        let zhangsan = new Person('zhangsan', 18)
+        zhangsan.speak(); //speak
+    </script>
+</body>
+
+</html>

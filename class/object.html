@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  ES5
+
+        // let zhangsan = {
+        //     name: 'zhangsan',
+        //     age: 18,
+        //     speak: function() {
+        //         console.log(this.name + ' can speak')
+        //     }
+        // }
+
+        // ES6
+        let zhangsan = {
+            name: 'zhangsan',
+            age: 18,
+            // ES6对象当中的方法没有 function关键字
+            // ES6类中的方法也没有 function关键字
+            // ES6类中的方法之间没有逗号
+            // ES6对象当中的方法有逗号
+            speak() {
+                console.log(this.name + ' can speak')
+            },
+            eat() {
+                console.log(this.name + ' can speak')
+            }
+        }
+    </script>
+</body>
+
+</html>

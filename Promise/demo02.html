@@ -9,24 +9,35 @@
 <body>
   <p>
     什么是Promise？ Promise是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。
+
      所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。
+
      从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。
-     Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。 它有三种状态， 分别是 pending - 进行中、 resolved - 已完成、 rejected - 已失败 
+
+     Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。 
+
+     它有三种状态， 分别是 pending - 进行中、
+                         resolved - 已完成、
+                         rejected - 已失败 
+
      Promise对象有以下两个特点。 
-    （1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。  
+
+    （1）有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。
+
     （2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。
-     Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。 只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。
 
-     ES6之前的Promise？ 在ES6中，Promise成为了原生对象，可以直接使用。但是在这之前，小伙伴们想要使用Promise，一般会借助于第三方库,使用已经较为成熟的有大量小伙伴使用的第三方Promise库，Bluebird 
+     Promise对象的状态改变，只有两种可能：
 
+     1、从pending变为fulfilled
+     2、从pending变为rejected。
 
-     Promise对象提供了统一的接口，使得控制异步操作更加容易。
-      Promise也有一些缺点。首先，无法取消Promise，一旦新建它就会立即执行，无法中途取消。
-      其次，如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。
-      第三，当处于pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。 
-      如果某些事件不断地反复发生，一般来说，使用 Stream 模式是比部署Promise更好的选择。
+     只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果。
 
-      可见Promise最大的好处是在异步执行的流程中，把执行代码和处理结果的代码清晰地分离了
+     ES6之前的Promise？
+
+      在ES6中，Promise成为了原生对象，可以直接使用。
+      但是在这之前，小伙伴们想要使用Promise，一般会借助于第三方库,
+      使用已经较为成熟的有大量小伙伴使用的第三方Promise库，Bluebird 
   </p>
   <script>
   </script>

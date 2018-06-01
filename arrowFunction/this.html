@@ -2,29 +2,31 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 </head>
 
 <body>
-  <script>
-  // js 是静态作用域
-  // js 的普通函数当中，this指针是个奇葩，它的作用域是动态的
-  function Person() {
-    this.age = 10;
-  }
-  Person.prototype = {
-    grow: function() {
-      setInterval(() => {
-      	// js箭头函数当中的this是词法作用域（静态作用域）
-      	// 普通函数当中的this是动态作用域
-        this.age++;
-      }, 1000);
-    }
-  }
-  var zhangsan = new Person();
-  zhangsan.grow();
-  </script>
+    <script>
+        // js 是静态作用域
+        // js 的普通函数当中，
+        // this指针是个奇葩，
+        // 它的作用域是动态的
+        function Person() {
+            this.age = 10;
+        }
+        Person.prototype = {
+            grow: function() {
+                setInterval(() => {
+                    // js箭头函数当中的this是词法作用域（静态作用域）
+                    // 普通函数当中的this是动态作用域
+                    this.age++;
+                }, 1000);
+            }
+        }
+        var zhangsan = new Person();
+        zhangsan.grow();
+    </script>
 </body>
 
 </html>

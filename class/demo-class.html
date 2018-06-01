@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 类？人类、猫类、狗类
+        // 对象？秀薇、小白、狗杂种
+
+        // ES5 类就是构造函数
+        // function Person(name, age) {
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // 为Person类添加方法
+        // Person.prototype = {
+        //     speak: function() {
+        // console.log(this.name + 'can speak')
+        //     }
+        // }
+
+        // 通过类创建对象？
+        // let zhangsan = new Person('zhangsan', 18);
+
+
+        // ES6
+        // 新增了声明类的关键字 class
+        class Person {
+            //constructor是类的构造方法（相当于ES5中的构造函数）
+            // ES6 当中的方法没有function关键字
+            // constructor:function(){}
+            // constructor 方法是类中必须有的方法
+            // constructor方法在new 的时候就会执行（创建对象的时候会默认执行constructor方法）
+            constructor(name, age) {
+                    this.name = name;
+                    this.age = age
+                }
+                // 方法之间没有逗号
+                // speak是我们自定义的方法
+            speak() {
+                console.log(this.name + 'can speak')
+            }
+        }
+
+        // 创建对象？（创建对象的方式与ES6一样）
+        let zhangsan = new Person('zhangsan', 18)
+    </script>
+</body>
+
+</html>

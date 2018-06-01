@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 类、对象
+        // 通过类创建对象
+
+        // ES5当中的类就是构造函数
+
+        // function Person(name,age){ 
+        //    this.name = name;
+        //    this.age = age;
+        // }       
+
+
+        // 字面量的形式创建对象
+        // var zhangsan = {name:"zhangsan",age:19}
+
+        // 构造函数的原型对象
+        // 通过构造函数创建的对象 zhangsan ，zhangsan继承Person.prototype对象的方法和属性
+        // Person.prototype = {
+        //   speak:function(){
+        //   	console.log("我的名字是"+this.name)
+        //   }
+        // }
+
+        // 构造函数的形式
+        // var zhangsan = new Person("zhangsan","19");
+
+        // console.log(zhangsan);
+        // zhangsan.speak();
+
+
+        // ES6中的类和对象
+
+        // class Person {
+
+        // 构造方法（就是ES5当中的构造函数，创建对象的时候会默认调用constructor方法）
+        // constructor(name, age) {
+        // this.name = name;
+        // this.age = age
+        // }
+
+        // ES6类中的方法没有逗号
+        // ES6类中的方法没有function关键字
+        // ES6的类中的自定义方法本质上是构造函数的原型对象上的方法
+        // 说白了 speak ==== Person.prototype.speak
+        // speak() {
+        // console.log("我的名字是" + this.name)
+        // }
+
+        // }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // ES6类的继承（通过extends）
+
+        // ES5 类的继承？
+
+        function Person(name, age, height) {
+            this.name = name;
+            this.age = age;
+            this.height = height;
+        }
+        Person.prototype = {
+            eat: function() {
+                console.log('eat')
+            }
+        }
+
+        // 继承的类必须有原有的类的属性
+        function Man(name, age, height, long) {
+            // 继承的属性
+            this.name = name;
+            this.age = age;
+            this.height = height;
+            // Man类特有的属性
+            this.long = long;
+        }
+
+        // 让 Man类 继承 Person类
+        Man.prototype = new Person();
+
+        let caojie = new Man('caojie', 18, '150', '180')
+            // 如果caojie对象拥有eat方法，那么说明Man类继承了Person类
+    </script>
+</body>
+
+</html>

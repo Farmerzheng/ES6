@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 普通的飞机
+        class Plane {
+            constructor(type, bg_img) {
+                    this.type = type;
+                    this.bg_img = bg_img
+                }
+                // update方法本质上市添加到了 Plane.prototype上
+            update() {
+                console.log('update')
+            }
+        }
+
+        // 创建敌方飞机（敌方飞机要继承普通的飞机）
+
+        // EnemyPlane  敌方飞机类
+        // EnemyPlane  继承 Plane 类
+        // extends 继承、延伸、扩展 
+        // extends 和 let function class 一样，都是关键字
+        // extends 在ES5当中是一个保留字
+        // extends 在ES6当中作为了一个关键字
+        // ES6 的类中自定义的方法，本质上是定义在了类的原型对象上
+        // ES6 中的类和ES5 中的类本质上都一样（就是函数），只是写法不同罢了
+        class EnemyPlane extends Plane {
+            //子类的属性有可能比父类的多
+            // 解决办法
+            constructor(type, bg_img, speed) {
+                // 调用父类的构造函数
+                super(type, bg_img)
+
+                //speed是敌方飞机所特有的属性
+                this.speed = speed;
+            }
+
+            //敌方飞机有速度
+            speed() {
+                console.log(this.type + 'can move')
+            }
+
+        }
+
+        class MyPlane extends Plane {
+            constructor(type, bg_img) {
+                super(type, bg_img)
+            }
+
+            shoot() {
+                console.log('shoot')
+            }
+        }
+
+        let enemy = new EnemyPlane('F22', 'green', '1800')
+
+        let myPlane = new MyPlane('奸20', 'blue')
+
+
+        // 创建我方飞机（我方飞机要继承普通的飞机）
+    </script>
+</body>
+
+</html>
