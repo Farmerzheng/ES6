@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 有若干个异步任务，
+                需要先做任务1，
+                如果成功后再做任务2，
+                任何任务失败则不再继续并执行错误处理函数。
+
+                要串行执行这样的异步任务，如果不用Promise，需要写一层一层的嵌套代码。
+                有了Promise，我们只需要简单地写：
+                job1.then(job2).then(job3).catch(handleError);
+                其中，job1、job2和job3都是Promise对象。
+                */
+
+        /**
+         *  把大象装冰箱的步骤
+         * 1、打开冰箱
+         * 2、装进大象
+         * 3、冰箱门关上
+         */
+        function openFridge() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function() {
+                    console.log('冰箱门打开了')
+                    resolve('冰箱门打开了')
+                }, 2000)
+            })
+        }
+
+        openFridge().then((msg) => {
+
+            return new Promise((resolve, reject) => {
+                setTimeout(function() {
+                    console.log('大象装进冰箱了')
+                    resolve(msg + '大象装进冰箱了')
+                }, 5000)
+            })
+
+
+        }).then((msg) => {
+
+            return new Promise((resolve, reject) => {
+
+                setTimeout(function() {
+                    console.log(msg + '冰箱门关上了')
+                        // resolve(msg + '大象装进冰箱了')
+                }, 1000)
+
+            })
+        })
+    </script>
+</body>
+
+</html>

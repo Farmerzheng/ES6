@@ -1,4 +1,4 @@
-import { firstName, lastName, year, add } from '../export/export_02';
+import { firstName, lastName, year, add } from './profile.js';
 
 // import命令接受一对大括号，
 
@@ -6,17 +6,11 @@ import { firstName, lastName, year, add } from '../export/export_02';
 
 // 大括号里面的变量名，
 
-// 导入的变量名要与导出的变量名一致
-// 可以导入部分变量
+// 必须与导出模块对外接口的名称相同。
 
 // import命令输入的变量都是只读的，
-
 // 因为它的本质是输入接口。也就是说，
-
 // 不允许在加载模块的脚本里面，改写接口。
 
-// from指定模块文件的位置，
-// 可以是相对路径，
-// 也可以是绝对路径，
-
+// from指定模块文件的位置，可以是相对路径，也可以是绝对路径，
 // .js后缀可以省略

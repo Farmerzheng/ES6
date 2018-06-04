@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var add = x => x * x
+
+        var add = (x, y) => x * y
+
+        // 箭头函数当中，如果仅有一个参数，小括号可以省略
+
+        var add = (x, y) => {
+            var z = 2;
+            return x * y * z
+        }
+
+        // 箭头函数当中，
+        // 如果函数体重只有一行return语句，
+        // 那么 函数体的大括号可以省略，
+        // return关键字同样可以省略
+        // 当函数体当中有多条语句时，函数体的大括号不能省略        
+        // 箭头函数当中如果要是没有参数的话，小括号不能省略
+        /*
+         
+         将如下函数改写成箭头函数的形式
+         function add(a,b){
+           a = a+1;
+           b = a+1;
+           return a*b
+         }
+
+          var pi = function pi() {
+            return 3.14;
+          };
+          
+          function minus(a){
+           return a*10
+          }
+          */
+
+        var add = (a, b) => {
+            a = a + 1;
+            b = a + 1;
+            return a * b
+        }
+
+        var pi = () => 3.14
+
+        var minus = a => a * 10
+
+        /*
+         将如下箭头函数改写成普通函数
+           var fn = x => {
+                       if (x > 0) {
+                            return x * x;
+                        } else {
+                            return -x * x;
+                        }
+                    }
+          
+           var fn = (x, y) => x * x + y * y
+           
+           var fn = () => 3.14
+
+        */
+
+        function fn(x) {
+            if (x > 0) {
+                return x * x;
+            } else {
+                return -x * x;
+            }
+        }
+
+        function fn(x, y) {
+            return x * x + y * y
+        }
+
+        function fn() {
+            return 3.14
+        }
+    </script>
+</body>
+
+</html>

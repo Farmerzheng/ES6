@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="test"></p>
+    <script>
+        // Promise.prototype.then()
+        // Promise实例具有then方法，也就是说，then方法是定义在原型对象Promise.prototype上的。它的作用是为Promise实例添加状态改变时的回调函数。
+
+        // then方法返回的是一个新的Promise实例(注意，不是原来那个Promise实例)。因此可以采用链式写法，即then方法后面再调用另一个then方法。
+
+        // Promise.prototype.catch方法是.then(null,rejeaction)的别名，用于指定发生错误时的回调函数。
+
+        var val = 1;
+
+        // 我们假设step1, step2, step3都是ajax调用后端或者是
+        // 在Node.js上查询数据库的异步操作
+        // 每个步骤都有对应的失败和成功处理回调
+        // 需求是这样，step1、step2、step3必须按顺序执行
+
+        function step1(resolve, reject) {
+            console.log('步骤一：执行');
+            if (val >= 1) {
+                resolve('Hello I am No.1');
+            } else if (val === 0) {
+                reject(val);
+            }
+        }
+
+        function step2(resolve, reject) {
+            console.log('步骤二：执行');
+            if (val === 1) {
+                resolve('Hello I am No.2');
+            } else if (val === 0) {
+                reject(val);
+            }
+        }
+
+        function step3(resolve, reject) {
+            console.log('步骤三：执行');
+            if (val === 1) {
+                resolve('Hello I am No.3');
+            } else if (val === 0) {
+                reject(val);
+            }
+        }
+
+        new Promise(step1).then(function(val) {
+            console.log(val);
+            return new Promise(step2);
+        }).then(function(val) {
+            console.log(val);
+            return new Promise(step3);
+        }).then(function(val) {
+            console.log(val);
+            return val;
+        })
+
+        // 执行之后将会打印
+        // 步骤一：执行
+        // Hello I am No.1
+        // 步骤二：执行
+        // Hello I am No.2
+        // 步骤三：执行
+        // Hello I am No.3
+        // Hello I am No.3
+    </script>
+</body>
+
+</html>

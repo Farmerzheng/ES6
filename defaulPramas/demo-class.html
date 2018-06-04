@@ -2,40 +2,42 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 </head>
 
 <body>
-  <script>
-  /* 如果不传入参数，我们让创建出来的对象的
-     name 的默认属性是 "lisi"  age的默认属性是 10
-     */
-  // function Person(name, age) {
-  // 	// ES5 函数当中默认参数的书写形式
-  //   this.name = name || "lisi";
-  //   this.age = age || 10
+    <script>
+        // 默认参数
+        // 函数设置默认参数的好处？
+        // 执行函数的时候，不传参不会报错
+        // 默认参数提高了代码的严谨性
 
-  // }
+        // function Person(name, age) {
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // name 默认值是 'zhangsan'
+        // age 默认值是 18
 
-  // var zhangsan = new Person();
-  // console.log(zhangsan);
-  
-  // ES6 函数当中默认参数的书写形式
-  // ES6当中默认参数直接写在了函数的形参内
-  // 形参变量 = 默认参数
-  
-   function Person(name="lisi",age=10){
-      this.name = name;
-      this.age = age;
-   }
+        // ES5?
+        function Person(name, age) {
+            //  '||' 或
+            //  '&&' 且
+            //  '!'  非
+            this.name = name || 'zhangsan';
+            this.age = age || 18;
+        }
 
-   var zhangsan = new Person();
-   console.log(zhangsan)
+        // ES6?
+        // ES6中的默认参数写法可读性更强
+        // function Person(name = "zhangsan", age = 18) {
+        //     this.name = name;
+        //     this.age = age;
+        // }
 
-
-
-  </script>
+        let person1 = new Person();
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //js  是词法作用域（静态作用域）还是动态作用域？
+        //js 的作用域是静态作用域
+
+        var a = 1;
+
+        function add() {
+            // a 的值是通过词法分析得出来的
+            return a + 10;
+        }
+        add();
+
+        // js 函数当中有个奇葩的变量 this
+        // this变量是动态作用域
+
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        // Person.prototype = {
+        //     growUp: function() {
+        //         let self = this
+        //             // 每隔1s钟年龄加1
+        //         setInterval(function() {
+        //             // 动态执行时  this指 window
+        //             self.age++;
+        //         }, 1000)
+        //     }
+        // }
+
+        Person.prototype = {
+            growUp: function() {
+                // 每隔1s钟年龄加1
+                setInterval(() => {
+                    //箭头函数当中的this是静态作用域
+                    // 箭头函数当中的this是通过词法分析得到的
+                    // 箭头函数当中的this不是执行的时候确定的
+                    this.age++;
+                }, 1000)
+            }
+        }
+
+        var zhangsan = new Person('zhangsan', 18) // this 指 zhangsan
+        var lisi = new Person('lisi', 19) //this 指 lisi
+    </script>
+</body>
+
+</html>

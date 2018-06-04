@@ -2,28 +2,39 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 </head>
 
 <body>
-  <script>
-  // 对象作为函数参数
-  function person({ name, age, speak }) {
-    console.log(name, age, speak)
-  }
+    <script>
+        // 对象作为函数形参
+        function person({
+            name,
+            age,
+            speak
+        }) {
+            console.log(name, age, speak)
+        }
 
-  person({ name: "zhangsan", age: 16, speak: function() {} })
+        person({
+            name: "zhangsan",
+            age: 16,
+            speak: function() {}
+        })
 
 
-  function returnMultipleValues() {
-    return {
-      foo: 1,
-      bar: 2
-    };
-  }
-  var { foo, bar } = returnMultipleValues();
-  </script>
+        function returnMultipleValues() {
+            return {
+                foo: 1,
+                bar: 2
+            };
+        }
+        var {
+            foo,
+            bar
+        } = returnMultipleValues();
+    </script>
 </body>
 
 </html>
