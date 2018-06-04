@@ -2,40 +2,40 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 </head>
 
 <body>
-  <script>
- // ES5中类的创建
-  function Plane(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-  
-  Plane.prototype = {
-    shoot: function() {
-      console.log(this.name + " can shoot")
-    }
-  }
+    <script>
+        // ES5中类的创建
+        function Plane(name, age) {
+            this.name = name;
+            this.age = age;
+        }
 
-  function EnemyPlane(name, age, speed) {
-    this.name = name;
-    this.age = age;
-    this.speed = speed;
-  }
+        Plane.prototype = {
+            shoot: function() {
+                console.log(this.name + " can shoot")
+            }
+        }
 
-  // 让EnemyPlane类继承自Plane类
-  EnemyPlane.prototype = new Plane();
-  
-  // 为EnemyPlane类添加一个moveDown方法  
-  EnemyPlane.prototype.moveDown = function(){
-    console.log(this.name + "能够向下移动")
-  }
-  var enemyOne = new EnemyPlane("F22", "20", 2000);
-  enemyOne.shoot();
-  </script>
+        function EnemyPlane(name, age, speed) {
+            this.name = name;
+            this.age = age;
+            this.speed = speed;
+        }
+
+        // 让EnemyPlane类继承自Plane类
+        EnemyPlane.prototype = new Plane();
+
+        // 为EnemyPlane类添加一个moveDown方法  
+        EnemyPlane.prototype.moveDown = function() {
+            console.log(this.name + "能够向下移动")
+        }
+        var enemyOne = new EnemyPlane("F22", "20", 2000);
+        enemyOne.shoot();
+    </script>
 </body>
 
 </html>

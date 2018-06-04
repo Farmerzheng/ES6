@@ -2,24 +2,54 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
 </head>
 
 <body>
-  <script>
-  // 由于this在箭头函数中已经按照词法作用域绑定了，所以，用call()或者apply()调用箭头函数时，无法对this进行绑定，即传入的第一个参数被忽略：
+    <script>
+        // this
+        // 箭头函数内部的this是词法作用域， 由上下文确定。
+        // ES5中函数中的this是动态作用域（ES5除了this变量，都是词法作用域）
 
-  var obj = {
-    birth: 1990,
-    getAge: function(year) {
-      var b = this.birth; // 1990
-      var fn = (y) => y - this.birth; // this.birth仍是1990
-      return fn.call({ birth: 2000 }, year);
-    }
-  };
-  obj.getAge(2015); // 25
-  </script>
+
+        // function Person() {
+        // 构造函数 Person() 定义的 `this` 就是新实例对象自己
+        // this.age = 0;
+        // setInterval(function growUp() {
+        // 在非严格模式下，growUp() 函数定义了其内部的 `this`为全局对象, 
+        // 不同于构造函数Person() 的定义的 `this`
+        // this.age++;
+        // }, 1000);
+        // }
+
+        // var p = new Person();
+        // 在 ECMAScript 5 中，这个问题通过把this的值赋给变量，
+        // 然后将该变量放到闭包中来解决。
+
+        // function Person() {
+        //   var self = this; // 也有人选择使用 `that` 而非 `self`. 
+        //   // 只要保证一致就好.
+        //   self.age = 0;
+        //   setInterval(function growUp() {
+        //     // 回调里面的 `self` 变量就指向了期望的那个对象了
+        //     self.age++;
+        //   }, 1000);
+        // }
+
+        // 箭头函数会捕获其所在上下文的 this 值，
+        // 作为自己的 this 值，因此下面的代码将如期运行。
+
+
+        // function Person() {
+        //   this.age = 0;
+        //   setInterval(() => {
+        //     this.age++; // this正确地指向了person对象
+        //   }, 1000);
+        // }
+
+        // var p = new Person();
+    </script>
 </body>
 
 </html>

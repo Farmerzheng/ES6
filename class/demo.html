@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 将如下代码改写成ES6的形式
+
+        var zhangsan = {
+                name: 'zhangsan',
+                age: 18,
+                speak: function() {
+
+                },
+                eat: function() {
+
+                }
+            }
+            // ES6 
+        let zhangsan = {
+            name: 'zhangsan',
+            age: 18,
+            speak() {
+                //  ES6对象当中的方法没有function关键字
+            },
+            eat() {
+
+            }
+        }
+
+
+
+        function Plane(name, speed) {
+            this.name = name;
+            this.speed = speed;
+        }
+        Plane.prototype = {
+            shoot: function() {
+                console.log(this.name + 'shoot')
+            }
+        }
+
+        // ES6 
+        class Plane {
+            // 构造方法（相当于ES5 中的构造函数）
+            constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+                // ES6中，类的方法之间没有逗号
+            shoot() {
+                console.log(this.name + 'shoot')
+            }
+
+        }
+
+
+        // ES5中的继承
+        function EnemyPlane(name, speed, color) {
+            this.name = name;
+            this.speed = speed;
+            this.color = color;
+        }
+        EnemyPlane.prototype = new Plane();
+        EnemyPlane.prototype.moveDown = function() {
+            console.log('enemyPlane can move down')
+        }
+        EnemyPlane.fly = function() {
+            console.log('enemyPlane can fly')
+        }
+
+        // ES6
+        class EnemyPlane extends Plane {
+            constructor(name, speed, color) {
+                    // 调用父类的构造函数
+                    super(name, speed)
+                        // 子类新增的属性
+                    this.color = color;
+                }
+                // 动态方法
+            moveDown() {
+                    console.log('enemyPlane can move down')
+                }
+                // 静态方法
+            static fly() {
+                console.log('enemyPlane can fly')
+            }
+        }
+    </script>
+</body>
+
+</html>

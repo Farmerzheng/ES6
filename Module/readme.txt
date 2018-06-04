@@ -34,7 +34,11 @@ module.exports = {
 	}
 }
 
-通过该文件可以使用webpack打包工具, webpack会从import.js进入, 对该文件中的内容进行编译并打包, 最终会在dist目录下生成打包好的文件bundle.js, 编译打包过程中用到的工具在module对象的loaders中声明, 这里使用了babel-loader来对JS文件进行编译(包括从ES6转换为ES5以及打包)
+通过该文件可以使用webpack打包工具, 
+webpack会从import.js进入, 对该文件中的内容进行编译并打包, 
+最终会在dist目录下生成打包好的文件bundle.js, 
+编译打包过程中用到的工具在module对象的loaders中声明, 
+这里使用了babel-loader来对JS文件进行编译(包括从ES6转换为ES5以及打包)
 
 
 
