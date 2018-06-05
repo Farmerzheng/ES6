@@ -67,20 +67,13 @@
 
 ### 如何查看安装程序的环境变量？
 
-   ![](./2.png)
-   ![](./3.png)
-   ![](./4.png)
+   ![](./images/2.png)
+   ![](./images/3.png)
+   ![](./images/4.png)
 
 
-# npm
 
-### npm init    
----
-初始化项目,生成整个项目的依赖包配置文件 package.json
-
-### npm install 
----
-安装包的命令
+### 安装本地包的命令
 
 >npm install --save webpack
 ```
@@ -106,15 +99,14 @@
 ```
 会搜索 package.json所有的依赖包并下载
 ```
+```
+将webpack作为项目依赖下载到 node_modules 文件夹下
+node_modules 文件夹里面存放着所有的局部安装的包（包括开发依赖的包和项目依赖的包）
 
->将webpack作为项目依赖下载到 node_modules 文件夹
->node_modules 文件夹里面存放着所有的局部安装的包（包括开发依赖的包和项目依赖的包）
->node_modules 文件夹在安装`第一个包`的时候会自动创建
->以后安装的`局部包`都会放在node_modules文件夹下
-
-### npm list
----
->查看所有依赖的包    
+node_modules 文件夹在安装`第一个包`的时候会自动创建
+以后安装的`局部包`都会放在node_modules文件夹下
+```
+  
 
     
 
