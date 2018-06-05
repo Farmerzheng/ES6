@@ -1,17 +1,117 @@
-编程 ----》 模块化开发
+### IDE ？
+> 代码编辑器（sublime、VSCode、webstorm、Hbuidler、Atom）
+ 
 
-c++/java/node/php  等后台语言已经实现了模块化开发
-例如：node 当中的 http\file 等模块
-      http 模块 处理网络请求的
-	  file 模块 处理文件操作的
+### `cmd`窗口？
+>windows 操作系统为我们提供的命令行窗口
+>我们操作电脑一般用鼠标和键盘
+>我们完全可以在 `cmd`窗口操作电脑，在`cmd`窗口操作电脑可以实现和鼠标键盘同样的功能
 
-ES5  当中没有模块的概念 
-ES6  引入的模块的概念（import \ export）
-ES6  在2015年标准出来，标志着前端开发进入模块化时代
+#### 如何打开计算机的cmd窗口？
+ 
+ >`windows + R`  在弹出的窗口当中输入 `cmd`命令，
+ 然后回车确定
+ 
+ >`powershell`窗口 本质上就是 `cmd` 窗口
 
-像import和export这两个关键字现在任何浏览器中都是不支持的
+>vscode 里面集成了 `cmd` 窗口
+
+>vscode可以打开多个 `cmd`  窗口
+
+![](./1.png)
+
+### cmd窗口常用命令？
+
+* `cd 空格 文件夹名称`  （进入某个文件夹）
+* `ls`  （列出所有文件夹下面的文件）
+* `cd  空格 .. ` （跳出某个文件夹）
+* `调出上一次命令`  : 上箭头
+* `调出下一次命令 `：下箭头
 
 
+>传统的网页开发，没有模块化的概念，自从ES6诞生以来，网页编程进入了模块化开发的时代
+
+>c++/java/node/php  等后台语言已经实现了模块化开发例如：node 当中的 http\file 等模块
+      >http 模块 处理网络请求的
+	  >file 模块 处理文件操作的
+
+>ES6中的import和export这两个关键字现在任何浏览器中都是不支持的
+
+### 如何才能让浏览器支持 import 、export?
+
+>将export.js和 import.js通过webpack打包 
+
+
+### 如何通过webpack将export.js和import.js打包？
+
+1. 安装webpack?
+
+   >npm install -g webpack
+
+   * `npm` : node package manager (node包管理器)
+   * `install` 安装
+   * `-g` 等同于 `--global`
+     >也就是可以写成 `npm install --global webpack` 
+
+     >`-g `表示全局安装的意思
+
+### 全局安装与局部安装的区别？
+
+ >安装某个node包？有三种安装方式 
+ * 全局安装
+   >npm install -g 包名 
+ * 作为项目的依赖安装
+   >npm install --save 包名
+ * 作为项目的开发依赖安装
+   >npm install --save-dev 包名
+
+### 全局安装
+
+   >`全局安装`的特点？
+
+    >会将包注册到系统的环境变量当中
+    >安装在windows系统上面了
+
+   >注册到系统的环境变量当中有什么好处？  
+
+    >cmd窗口能够识别包内的命令（可以在任意地方使用包内的命令，无需关心使用命令的路径）
+
+    >例如 `node`
+    >node注册到了系统环境变量当中，可以在`任意地方`调用`node`命令  
+    >在` D:\H5\ES6>`文件夹下
+    >`node -v `  查看node的版本号 
+    >在 `D:\H5`文件加下   
+    >`node -v `  查看node的版本号 
+
+   >如果node没有注册到系统的环境变量当中怎么查看版本号？
+ ```javascript
+    `C:\Program Files\nodejs\node -v`（ 使用node命令的时候要加上node的安装路径）
+```
+
+
+  >为什么 `node *** ` 会被 `cmd` 窗口识别？
+
+   >因为node 在安装的时候注册到了系统的环境变量当中
+```javascript
+   如何查看系统的环境变量？
+   ![](./2.png)
+   ![](./3.png)
+   ![](./4.png)
+```
+### 局部安装
+ * 作为项目的依赖安装
+   >npm install --save 包名
+ * 作为项目的开发依赖安装
+   >npm install --save-dev 包名
+
+#### 局部安装的特点
+ * 没有注册到系统的环境变量当中
+ * 没有安装在 windows\linux等  操作系统上    
+ * 安装在了项目的 node_modules 文件夹下面  
+ * 局部安装一定要在项目的`根目录`下安装
+   例如 ` D:\H5\ES6\Module\webpack-class>`
+
+  
 
 
 

@@ -1,0 +1,14 @@
+{
+  "name": "webpack-class",
+  "version": "1.0.0",
+  "description": "module demo",
+  "main": "import.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^4.10.2"
+  }
+}

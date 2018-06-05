@@ -20,3 +20,11 @@ export { firstName, lastName, year, add }
 // 正确
 // function f() {}
 // export {f};
+
+/**
+ * 编写export.js文件
+ * 此文件的功能？
+ * 导出常量 R = 5
+ * 导出常量 ERR_OK = 0
+ * 导出随机函数 randomFn 
+ */

@@ -13,10 +13,10 @@
 
         // ES5当中的类就是构造函数
 
-        // function Person(name,age){ 
-        //    this.name = name;
-        //    this.age = age;
-        // }       
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
 
 
         // 字面量的形式创建对象
@@ -24,11 +24,11 @@
 
         // 构造函数的原型对象
         // 通过构造函数创建的对象 zhangsan ，zhangsan继承Person.prototype对象的方法和属性
-        // Person.prototype = {
-        //   speak:function(){
-        //   	console.log("我的名字是"+this.name)
-        //   }
-        // }
+        Person.prototype = {
+            speak: function() {
+                console.log("我的名字是" + this.name)
+            }
+        }
 
         // 构造函数的形式
         // var zhangsan = new Person("zhangsan","19");
