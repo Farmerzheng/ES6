@@ -1,25 +1,38 @@
 # Babel
-## Babel 作用？
+### Babel 作用？
+---
+```
+   2015年6月， ES2015（即 ECMAScript 6、ES6） 正式发布。
+   虽然 ES6 提出了许多激动人心的新特性，但由于目前许多浏览器不支持或者支持不好，没有普遍地推广起来。
+   而 Babel 的出现，让我们可以现在就使用最新的 JavaScript 语法，而不用等待浏览器提供支持。
 
-2015年6月， ES2015（即 ECMAScript 6、ES6） 正式发布。虽然 ES6 提出了许多激动人心的新特性，但由于目前许多浏览器不支持或者支持不好，没有普遍地推广起来。
-而 Babel 的出现，让我们可以现在就使用最新的 JavaScript 语法，而不用等待浏览器提供支持。
+   Babel 是一个转换编译器，它能将 ES6 转换成可以在浏览器中运行的代码。
+   Babel 可以处理 ES6 的所有新语法
 
-Babel 是一个转换编译器，它能将 ES6 转换成可以在浏览器中运行的代码。Babel 可以处理 ES6 的所有新语法
+  在线转换：http://babeljs.io/repl/
+```
+   Babel 的用途并不止于此，它支持语法扩展，能支持像 React 所用的 JSX 语法，同时还支持用于静态类型检查的流式语法（Flow Syntax）。
 
-在线转换：http://babeljs.io/repl/
-
-
-## Babel的历史？
- babel 5 是全家桶，包括各种package， plugins，尽可能的想通过你的一次安装，达到全能的效果。不过你现在安装npm install babel，会得到一个 warning。
+### Babel的历史？
+---
+```
+ babel 5 是全家桶，包括各种package， plugins，尽可能的想通过你的一次安装，达到全能的效果。
  
- babel 6 是 2015年10月30号发布，主要做了以下更新：
+  babel 6 是 2015年10月30号发布，主要做了以下更新：
 
-拆分成几个核心包，babel-core,babel-node,babel-cli...
-没有了默认的转换，现在你需要手动的添加 plugin。也就是插件化
-添加了 preset，也就是预置条件。
-增加了 .babelrc 文件，方便自定义的配置。
+  1.拆分成几个核心包，babel-core,babel-node,babel-cli...
+  2.没有了默认的转换，现在你需要手动的添加 plugin。也就是插件化
+  3.添加了 preset，也就是预置条件。
+  4.增加了 .babelrc 文件，方便自定义的配置。
+```
 
-## 包？
+
+### 安装Babel
+---
+由于 JavaScript 社区没有统一的构建工具、框架、平台等等，因此 Babel 正式集成了对所有主流工具的支持。 从 Gulp 到 Browserify，从 Ember 到 Meteor，不管你的环境设置如何，Babel 都有正式的集成支持。
+
+### 包？
+---
 babel 里面有好多的包，所以必须搞清楚他们都是干嘛的，才能让我们更好的使用这个工具。
 
 babel-core

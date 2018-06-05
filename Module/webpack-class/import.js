@@ -1,16 +1,7 @@
-import { firstName, lastName, year, add } from './profile.js';
+import { firstName, lastName, year, add } from './export';
 
-// import命令接受一对大括号，
+let sum = add(1, 2);
 
-// 里面指定要从其他模块导入的变量名。
-
-// 大括号里面的变量名，
-
-// 必须与导出模块对外接口的名称相同。
-
-// import命令输入的变量都是只读的，
-// 因为它的本质是输入接口。也就是说，
-// 不允许在加载模块的脚本里面，改写接口。
-
-// from指定模块文件的位置，可以是相对路径，也可以是绝对路径，
-// .js后缀可以省略
+// 如果打包成功，那么会在浏览器控制台打印出内容
+console.log(`${firstName}${lastName} was born in ${year}`)
+console.log(sum)
