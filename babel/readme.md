@@ -55,28 +55,33 @@ const square = function square(n) {
 
      Babel 的 CLI 是一种在命令行下使用 Babel 编译文件的简单方法。
 
-　　4，为了使用这个命令, 我们需要把这个命令放到 npm scripts 中. 打开package.json 文件找到 scripts , 添加 “build”: “babel src –d lib” 以后在 命令行中输入npm run build, 就可以执行编译。
+　　4.如何执行本地安装的 babel-cli 包命令
 
-　   常用编译命令
+```
+1. 把这个命令放到 npm scripts 中. 打开package.json 文件找到 scripts 字段 , 添加 “build”: “babel es6.js -o es5.js” 以后在 命令行中输入 npm run build, 就可以执行编译。
 
-     babel my-file.js
+2. 直接执行 node_modules/.bin/babel es6.js 
+```
+### 常用babel命令
 
-     这将把编译后的结果直接输出至终端。
+  * babel my-file.js
 
-     使用 --out-file 或着 -o 可以将结果写入到指定的文件。.
+    >这将把编译后的结果直接输出至终端。
 
-     babel example.js --out-file compiled.js
-     或
-     babel example.js -o compiled.js
+  * 使用 --out-file 或着 -o 可以将结果写入到指定的文件。.
 
-    如果我们想要把一个目录整个编译成一个新的目录，可以使用 --out-dir 或者 -d。.
+    >babel example.js --out-file compiled.js
+    >或
+    >babel example.js -o compiled.js
 
-    babel src --out-dir lib
-    或
-    babel src -d lib
+  * 如果我们想要把一个目录整个编译成一个新的目录
+    
+     >babel src --out-dir lib
+     >或
+     >babel src -d lib
 
 
->本地安装与全局安装
+### 本地安装与全局安装
 
     尽管你可以把 Babel-cli 全局安装在你的机器上，但是按项目逐个安装在本地会更好。
 
