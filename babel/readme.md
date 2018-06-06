@@ -48,88 +48,78 @@ const square = function square(n) {
 
 　　2. 创建两个文件夹, src(用于存放编译前的文件), lib(用于放编译后的文件)。在src 目录下新建一个index.js 文件用于编写代码， 这里写一个箭头函数如下：
 
-let sum = (num1, num2) => num1 + num2;
-console.log(sum(3, 5))
+   let sum = (num1, num2) => num1 + num2;
+   console.log(sum(3, 5))
 
-　　3. 这里只想用命令行工具对代码进行编译. 根据上面提到的模块化思想，如果我们只想使用某些内部组件执行某种构建任务，只需要单独的去安装相应的包就可以了. 这里，我们只想用一下babel-cli 命令行工具, 那么我们只需要安装这个包，npm install --save-dev babel-cli, 安装之后，这里用到一个命令，”babel src –d lib”
+   3.  这里只想用命令行工具对代码进行编译. 根据上面提到的模块化思想，如果我们只想使用某些内部组件执行某种构建任务，只需要单独的去安装相应的包就可以了. 这里，我们只想用一下babel-cli 命令行工具, 那么我们只需要安装这个包，npm install --save-dev babel-cli, 安装之后，这里用到一个命令，”babel src –d lib”
+
+     Babel 的 CLI 是一种在命令行下使用 Babel 编译文件的简单方法。
 
 　　4，为了使用这个命令, 我们需要把这个命令放到 npm scripts 中. 打开package.json 文件找到 scripts , 添加 “build”: “babel src –d lib” 以后在 命令行中输入npm run build, 就可以执行编译。
 
+　   常用编译命令
 
-安装 Babel
+     babel my-file.js
 
-### babel-cli
+     这将把编译后的结果直接输出至终端。
 
-Babel 的 CLI 是一种在命令行下使用 Babel 编译文件的简单方法。
+     使用 --out-file 或着 -o 可以将结果写入到指定的文件。.
 
-安装
+     babel example.js --out-file compiled.js
+     或
+     babel example.js -o compiled.js
 
- npm install --global babel-cli
+    如果我们想要把一个目录整个编译成一个新的目录，可以使用 --out-dir 或者 -d。.
 
-我们可以这样来编译我们的第一个文件：
-
- babel my-file.js
-
-这将把编译后的结果直接输出至终端。
-使用 --out-file 或着 -o 可以将结果写入到指定的文件。.
-
- babel example.js --out-file compiled.js
- 或
- babel example.js -o compiled.js
-
-如果我们想要把一个目录整个编译成一个新的目录，可以使用 --out-dir 或者 -d。.
-
- babel src --out-dir lib
- 或
- babel src -d lib
+    babel src --out-dir lib
+    或
+    babel src -d lib
 
 
-在项目内运行 Babel CLI
-尽管你可以把 Babel CLI 全局安装在你的机器上，但是按项目逐个安装在本地会更好。
+>本地安装与全局安装
 
-有两个主要的原因。
+    尽管你可以把 Babel-cli 全局安装在你的机器上，但是按项目逐个安装在本地会更好。
 
-1.在同一台机器上的不同项目或许会依赖不同版本的 Babel 并允许你有选择的更新。
+    有两个主要的原因。
 
-2.对工作环境没有隐式依赖，项目有很好的可移植性。
+    1.在同一台机器上的不同项目或许会依赖不同版本的 Babel 并允许你有选择的更新。
 
-要在（项目）本地安装 Babel CLI 可以运行：
+    2.对工作环境没有隐式依赖，项目有很好的可移植性。
 
- npm install --save-dev babel-cli
+    要在（项目）本地安装 Babel-cli 可以运行：
 
-注意:卸载全局安装的 Babel ，可以运行：
+    npm install --save-dev babel-cli
 
- npm uninstall --global babel-cli
-
-安装完成后，`package.json` 应该如下所示：
+    安装完成后，`package.json` 应该如下所示：
 
 
-{
-  "name": "my-project",
-  "version": "1.0.0",
-  "devDependencies": {
-    "babel-cli": "^6.0.0"
-  }
-}
-
-把运行命令写在 npm scripts 里，可以使用包的本地版本。
-
-只需将 "scripts" 字段添加到你的 package.json 文件内并且把 babel 命令写成 build 字段。.
-
-  {
-    "name": "my-project",
-    "version": "1.0.0",
-+   "scripts": {
-+     "build": "babel src -d lib"
-+   },
-    "devDependencies": {
-      "babel-cli": "^6.0.0"
+    {
+      "name": "my-project",
+      "version": "1.0.0",
+      "devDependencies": {
+        "babel-cli": "^6.0.0"
+      }
     }
-  }
-现在可以在终端里运行：
-npm run build
 
-这将以与之前同样的方式运行 Babel，但这一次我们使用的是本地babel。
+    package.json 中的 scripts 命令   
+    
+    只需将 "scripts" 字段添加到你的 package.json 文件内并且把 babel 命令写成 自定义字段（例如：build 字段。.）
+
+      {
+        "name": "my-project",
+        "version": "1.0.0",
+        "scripts": {
+         "build": "babel src -d lib"
+        },
+        "devDependencies": {
+          "babel-cli": "^6.0.0"
+        }
+      }
+      
+    现在可以在终端里运行：
+    npm run build
+
+    这将以与之前同样的方式运行 Babel，但这一次我们使用的是本地babel。
 
 
 
