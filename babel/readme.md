@@ -107,37 +107,37 @@ npm install --save-dev babel-preset-es2015
     babel-preset-latest 就是把所有
     es2015, es2016, es2017 全部包含在一起了。
 
-2, 按阶段： 对于 ECMAScript 的功能，每一个提案都会经过 5 个阶段：
+2.  按阶段： 对于 ECMAScript 的功能，每一个提案都会经过 5 个阶段：
 
-      stage-0 : 稻草人阶段， 就是一个想法
-      stage-1 : 建议阶段，值得去努力
-      stage-2 : 草案阶段， 初始的细节描述
-      stage-3 :候选阶段，草案基本完成，浏览器厂商实验性的实现
-      stage-4 :完成阶段，添加到下一年的版本中
+    stage-0 : 稻草人阶段， 就是一个想法
+    stage-1 : 建议阶段，值得去努力
+    stage-2 : 草案阶段， 初始的细节描述
+    stage-3 :候选阶段，草案基本完成，浏览器厂商实验性的实现
+    stage-4 :完成阶段，添加到下一年的版本中
 
-      Babel 对应不同的阶段,
-      提供了不同的预设，
-      babel-preset-stage-0，
-      babel-preset-stage-1，
-      babel-preset-stage-2，
-      babel-preset-stage-3.
-      这里没有 stage-4,
-      是因为它将添加到下一年的版本中，
-      也就是到了按年份进行预设。
-      所以我们还可以得出其他的几个结论：
+    Babel 对应不同的阶段,
+    提供了不同的预设，
+    babel-preset-stage-0，
+    babel-preset-stage-1，
+    babel-preset-stage-2，
+    babel-preset-stage-3.
+    这里没有 stage-4,
+    是因为它将添加到下一年的版本中，
+    也就是到了按年份进行预设。
+    所以我们还可以得出其他的几个结论：
 
-      1， 按年份进行的预设，其实是 tc39 委员会已经批准的，
-      浏览器将要实现的功能，
+    1， 按年份进行的预设，其实是 tc39 委员会已经批准的，
+    浏览器将要实现的功能，
 
-      2.  stage-X 的预设，是没有被批准的功能
+    2.  stage-X 的预设，是没有被批准的功能
 
-      3.  stage-0 阶段的预设包含的插件大于 stage-1 阶段包含的插件,
-          stage-1 > stage-2,
-          stage-2 > stage-3,  
-          所以我们安装 stage-X 预设时，只选装一个就可以了。
+    3.  stage-0 阶段的预设包含的插件大于 stage-1 阶段包含的插件,
+        stage-1 > stage-2,
+        stage-2 > stage-3,  
+        所以我们安装 stage-X 预设时，只选装一个就可以了。
 
-      4.  如果没有提供 es2015 相关的预设，
-      preset-stage-X 这种阶段性的预设也不能用。
+    4.  如果没有提供 es2015 相关的预设，
+        preset-stage-X 这种阶段性的预设也不能用。
 
 ### 简单的小例子
 
