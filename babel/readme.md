@@ -143,36 +143,36 @@ npm install --save-dev babel-preset-es2015
 
 （全局安装包与本地安装包例子）
 
-    尽管你可以把 Babel-cli 全局安装在你的机器上，
+尽管你可以把 Babel-cli 全局安装在你的机器上，
 
-    但是按项目逐个安装在本地会更好。
+但是按项目逐个安装在本地会更好。
 
-    有两个主要的原因。
+有两个主要的原因。
 
-    1.在同一台机器上的不同项目或许会
-      依赖不同版本的 Babel 并允许你有选择的更新。
+1.在同一台机器上的不同项目或许会
+依赖不同版本的 Babel 并允许你有选择的更新。
 
-    2.对工作环境没有隐式依赖，项目有很好的可移植性。
+2.对工作环境没有隐式依赖，项目有很好的可移植性。
 
 ### 常用 babel 命令
 
 ---
 
-    1、
-     这将把编译后的结果直接输出至终端。
+1、
+这将把编译后的结果直接输出至终端。
 
-     babel my-file.js
+babel my-file.js
 
-    2、
-     使用 --out-file 或着 -o 可以将结果写入到指定的文件。
+2、
+使用 --out-file 或着 -o 可以将结果写入到指定的文件。
 
-     babel example.js --out-file compiled.js
-     或
-     babel example.js -o compiled.js
+babel example.js --out-file compiled.js
+或
+babel example.js -o compiled.js
 
-    3、
-     如果我们想要把一个目录整个编译成一个新的目录
+3、
+如果我们想要把一个目录整个编译成一个新的目录
 
-     babel src --out-dir lib
-     或
-     babel src -d lib
+babel src --out-dir lib
+或
+babel src -d lib
