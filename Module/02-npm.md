@@ -148,8 +148,8 @@ npm 是随同 Node 一起安装的包管理工具，能解决 Node 代码部署�
      
      将 import.js和export.js打包到了 dist文件夹下面的 bundle.js ？
      
-     第一种方式：
-
+     第一种方式(webpack是全局安装的)：
+     
       执行 webpack  命令
 
      第二种方式：

@@ -1,39 +1,28 @@
 
 
+```
+传统的网页开发，没有模块化的概念，自从ES6诞生以来，网页编程进入了模块化开发的时代
+```
 
->传统的网页开发，没有模块化的概念，自从ES6诞生以来，网页编程进入了模块化开发的时代
+```
+c++/java/node/php  等后台语言已经实现了模块化开发,
+例如：
+node 当中的 http\file 等模块
+http 模块 处理网络请求的
+file 模块 处理文件操作的
 
->c++/java/node/php  等后台语言已经实现了模块化开发例如：node 当中的 http\file 等模块
-      >http 模块 处理网络请求的
-	  >file 模块 处理文件操作的
+```
 
->ES6中的import和export这两个关键字现在任何浏览器中都是不支持的
+```
+ES6中的import和export这两个关键字现在任何浏览器中都是不支持的 ,如何才能让浏览器支持 import 、export?
 
-### 如何才能让浏览器支持 import 、export?
-
->将export.js和 import.js通过webpack打包 
+将export.js和 import.js通过webpack打包 
+```
 
 
-### 如何通过webpack将export.js和import.js打包？
 
-1. 全局安装webpack?
-  
-  * npm install -g webpack   
 
-    * `npm` : node package manager (node包 
-    * `install` 安装
-    * `-g` 等同于 `--global`
-     >也就是可以写成 `npm install --global webpack` 
 
-     >`-g `表示全局安装的意思
-
-2. 作为开发依赖安装webpack?
-  * npm install --save-dev webpack
-
-3. 作为项目依赖安装webpack?
-  * npm install --save webpack  
-  
-   npm install -g webpack   
 
 
 
@@ -42,18 +31,15 @@
 
 ### webpack的作用？
 >打包前端写好的文件（js\css\图片\less\sass）
->本质上是一个打包工具
+>本质上是一个node包
 
-### webpack 如何使用？
+### 如何通过webpack将export.js和import.js打包？
 ---
-```
-例子：将写好的 export.js和import.js 打包成一个文件
-     打包好的js文件能够被浏览器识别（目前所有浏览器都不支持import \export等关键字）
-```
+
 
    1.安装webpack: npm install -g webpack
 
-   2.安装依赖的包
+   2.安装package.json中依赖的包（通过npm install）
 
    ```
    /*package.json*/
@@ -79,24 +65,37 @@
 }
 
    ```
+   3.在根目录下创建webpack.config.js(webpack包的配置文件)
 
 
 
-   3.在根目录下创建webpack.config.js, 
-   这个文件是用来描述一些要使用webpack工具进行打包的配置信息
+```
+/*webpack.config.js*/
 
-webpack.config.js:
+ES6中模块用到的关键字：export、import、from
+node中模块用到的关键字：require、module.exports 
 
+node中用的是commonJS 模块规范
+
+//引入webpack模块，require 命令默认会从 node_modules文件夹下面加载模块，node_modules文件夹下面的模块在引入的时候无需书写路径，直接写模块名称就可以了，如果是自己写的模块必须要标明路径
 var webpack = require("webpack");
+
+//引入path模块
 var path = require("path");
+
+//module.exports 输出摸个模块
 module.exports = {
-	entry:"./import.js",
+	entry:"./import.js",//打包的入口
 	output:{
+        //输出文件的路径
+        // __dirname 项目的根目录
+        //dist 输出的文件夹名称
 		path:path.resolve(__dirname,"dist"),
+        //输出的文件名
 		filename:"bundle.js"
 	},
 	module:{
-		loaders:[
+		rules:[
            {
            	test:/\.js/,loader:"babel-loader"
            }
@@ -104,17 +103,26 @@ module.exports = {
 	}
 }
 
-通过该文件可以使用webpack打包工具, 
+执行webpack命令时会依据webpack.config.js中的配置信息进行处理, 
 webpack会从import.js进入, 对该文件中的内容进行编译并打包, 
 最终会在dist目录下生成打包好的文件bundle.js, 
 编译打包过程中用到的工具在module对象的loaders中声明, 
-这里使用了babel-loader来对JS文件进行编译(包括从ES6转换为ES5以及打包)
+这里使用了babel-loader来对JS文件进行编译
+```
+
+### 配置文件
+```
+   配置文件一般有两种类型：json和js
+   (例如package.json和webpack.config.js)
+
+   一般在执行命令的时候会‘搜索检查甚至执行’配置文件里面的信息
+
+   .json类型的配置文件是不能够在里面写注释的
+   .js类型的配置文件能够在里面写注释
+```
 
 
->为什么要全局安装webpack?
-```
-1、webpack仅仅是一个打包工具，将写好的项目打包完成后上线（打包完成后就没有webpack什么事了）
-2、开发依赖安装，在我们使用webpack的命令的时候不太方便
-```
+
+
 
 
