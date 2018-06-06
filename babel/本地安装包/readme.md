@@ -13,4 +13,11 @@
 
 >输入 node_modules/.bin/babel es6.js （正常）
 
+>在package.json中设置scripts命令,然后运行 npm run test
+```
+  "scripts": {
+        "test": "babel es6.js"
+    }
+```
+   
          
