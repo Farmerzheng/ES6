@@ -130,16 +130,352 @@ npm install --save-dev babel-preset-es2015
    浏览器将要实现的功能，
 
    2.  stage-X 的预设，是没有被批准的功能
-
    3.  stage-0 阶段的预设包含的插件大于 stage-1 阶段包含的插件,
        stage-1 > stage-2,
        stage-2 > stage-3,  
        所以我们安装 stage-X 预设时，只选装一个就可以了。
-
    4.  如果没有提供 es2015 相关的预设，
        preset-stage-X 这种阶段性的预设也不能用。
 
+### babel 包
+
+---
+
+babel 里面有好多的包，所以必须搞清楚他们都是干嘛的，才能让我们更好的使用这个工具。 
+
+#### babel-core
+
+可以看做 babel 的编译器。babel 的核心 api 都在这里面，比如 transform，主要都是处理转码的。
+
+#### babel-cli
+
+提供命令行运行 babel。也就是你可以 `babel filename` 去对文件转码。 
+
+安装的话
+
+```
+npm install --save-dev babel-cli
+
+npm isntall babel-cli -g
+```
+
+使用对应就是
+
+```
+node_module/.bin/babel script.js --out-file script-compiled.js
+
+babel script.js --out-file script-compiled.js
+```
+
+
+
+#### babel-node
+
+​     也是 babel-cli 下面的一个 command，主要是实现了 node 执行脚本和命令行写代码的能力。举两个例子就清楚了。
+
+node 环境肯定是不支持 jsx 的
+
+```
+// test.js
+const React = require('react');
+const elements = [1, 2, 3].map((item) => {
+  return (
+    <div>{item}</div>
+  )
+});
+
+console.log(elements);
+```
+
+执行 test.js，会报错，不认识这个语法。
+
+```
+node test.js //报错
+```
+
+但是使用 babel-node 就可以。
+
+```
+node_modules/.bin/babel-node --presets react test.js
+```
+
+--presets react 是参数，等同于
+
+```
+{
+  "presets": ["react"]
+}
+```
+
+执行正常。
+
+通过例子基本已经介绍了 babel-node 的用法了，就是方便我们平常开发时候，写一些脚本的。
+
+它不适用于生产环境。另外，babel-node 已经内置了 polyfill，并依赖 babel-register 来编译脚本。
+
+
+
+#### babel-register
+
+```
+npm install babel-register --save-dev
+```
+
+ babel-node 可以通过它编译代码，其实就是一个编译器。
+
+我们同样可以在代码中引入它 `require('babel-register')`，并通过 node 执行我们的代码。
+
+它的原理是通过改写 node 本身的 require，添加钩子，然后在 require 其他模块的时候，就会触发 babel 编译。
+
+也就是你引入`require('babel-register')`的文件代码，是不会被编译的。
+
+只有通过 require 引入的其他代码才会。
+
+babel-node 其实就是在内存中写入一个临时文件，在顶部引入 babel-register，然后再引入我们的脚本或者代码
+
+
+
+举个例子，
+
+还是 node 中执行 jsx，要通过 babel 编译。
+
+我们可以把 jsx 的代码 a.js 编译完输出到一个 b.js，然后 `node b.js` 也是可以执行的。
+
+但是太麻烦，不利于开发。
+
+让我们看一下通过 register 怎么用：
+
+```
+// register.js 引入 babel-register，并配置。然后引入要执行代码的入口文件
+require('babel-register')({ presets: ['react'] });
+require('./test')
+```
+
+```
+// test.js 这个文件是 jsx...
+const React = require('react');
+const elements = [1, 2, 3].map((item) => {
+  return (
+    <div>{item}</div>
+  )
+});
+console.log(elements);
+```
+
+```
+// 执行  node register.js
+```
+
+它的特点就是实时编译，不需要输出文件，等执行的时候再去编译。所以它很适用于开发。
+
+总结一下就是，多用在 node 跑程序，做实时编译用的，
+
+值得一提的是，babel-register 这个包之前是在 babel-core 下面的，
+
+所以也可以 `require('babel-core/register')` 去引入，
+
+跟`require('babel-register')`是一样的。
+
+但是，babel 的团队把 register 独立出来了，
+
+而且未来的某一天（升 7.0）会从 babel-core 中废除，
+
+所以我们现在最好还是使用 babel-register 吧。
+
+
+
+#### babel-runtime
+
+```
+npm install babel-runtime --save
+```
+
+这个包很简单，就是引用了 core-js  、regenerator、helpers，
+
+然后生产环境把它们编译到 dist 目录下，做了映射，供使用。
+
+那么什么是 core-js 和 regenerator 呢。
+
+首先我们要知道上面提到的 babel-core 是对语法进行 transform 的，
+
+但是它不支持 :
+
+> build-ints（Eg: promise，Set，Map），
+>
+> prototype function（Eg: array.reduce,string.trim），
+>
+> class static function （Eg：Array.form，Object.assgin），
+>
+> regenerator （Eg：generator，async）
+
+等等拓展的编译。
+
+所以才要用到 core-js 和 regenerator。
+
+##### core-js
+
+core-js 是用于 JavaScript 的组合式标准化库，
+
+它包含
+
+```    
+    es5 （e.g: object.freeze）,
+
+    es6的 promise，symbols, collections, iterators, typed arrays，
+
+    es7+提案等等的 polyfills 实现。
+```
+
+它几乎包含了所有 JavaScript 最新标准的垫片
+
+```
+//需要单个引用
+require('core-js/array/reduce');
+require('core-js/object/values');
+```
+
+##### regenerator
+
+实现了 generator/yeild， async/await。
+
+所以 babel-runtime 是单纯的实现了 core-js 和 regenerator 引入和导出，
+
+比如这里是 filter 函数的定义，
+
+做了一个中转并处理了 esModule 的兼容。
+
+```
+module.exports = { "default": require("core-js/library/fn/array/filter"), __esModule: true };
+```
+
+##### helpers
+
+还记得提 babel-external-helpers 的时候，介绍 helpers 了吗。babel-runtime 里面的 helpers 就相当于我们上面通过 babel-external-helpers 生成的 helpers.js。只不过它把每个 helper 都单独放到一个文件夹里。这样，配合 transform-runtime 使用的时候，需要用 helper 转化的时候，就从 babel-runtime 中直接引用了。
+
+```
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+```
+
+#### 文件结构：
+
+![文件结构](https://segmentfault.com/img/remote/1460000011164344)
+
+#### 使用
+
+可以单独引入`require('babel-runtime/core-js/object/values');`
+
+不过这些模块都做了 esModule 的兼容处理，也就是上面引入的模块是`{ "default": require("core-js/library/fn/array/filter"), __esModule: true }`这样的，要使用还得加上 `.default`。所以我们期待的是，最好能有帮我们自动处理的插件，`babel-plugin-transform-runtime`就是用来做这个的。这个我们放到 plugin 去讲。
+
+#### babel-polyfill
+
+```
+npm install babel-polyfill --save
+```
+
+babel-polyfill 是为了模拟一个完整的ES2015 +环境，旨在用于应用程序而不是库/工具。
+
+并且使用babel-node时，这个polyfill会自动加载（这个我们在介绍 babel-node 的最后已经说了）。
+
+也就是说，它会让我们程序的执行环境，模拟成完美支持 es6+ 的环境，
+
+毕竟无论是浏览器环境还是 node 环境对 es6+ 的支持都不一样。
+
+它是以重载全局变量 （E.g: Promise）,还有原型和类上的静态方法（E.g：Array.prototype.reduce/Array.form），从而达到对 es6+ 的支持。
+
+
+
+我们结合 babel-register 去使用一下
+
+```
+// index.js
+require('babel-core/register')({});
+require('babel-polyfill');
+require('./async');
+```
+
+```
+// async.js
+function a() {
+  console.log('begin');
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 1000)
+  })
+  console.log('done');
+}
+a();
+
+node index.js
+```
+
+完美运行。
+
+
+
+### babel Plugins
+
+要说 plugins 就不得不提 babel 编译的过程。babel 编译分为三步：
+
+1. parser：通过 [babylon](https://github.com/babel/babylon) 解析成 AST。
+2. transform[s]：All the plugins/presets ，进一步的做语法等自定义的转译，仍然是 AST。
+3. generator： 最后通过 [babel-generator](https://github.com/babel/babel/blob/master/packages/babel-generator) 生成 output string。
+
+所以 plugins 是在第二步加强转译的，所以假如我们自己写个 plugin，应该就是对 ast 结构做一个遍历，操作。
+
+#### babel-plugin-transform-runtime
+
+上面我们知道，transform-runtime 是为了方便使用 babel-runtime 的，它会分析我们的 ast 中，是否有引用 babel-rumtime 中的垫片（通过映射关系），如果有，就会在当前模块顶部插入我们需要的垫片。试一下：
+
+```
+npm install babel-plugin-transform-runtime
+```
+
+```
+// 编译前
+console.log(Object.values({ 1: 2 }));
+```
+
+```
+node_modules/.bin/babel --plugins transform-runtime values.js
+```
+
+```
+// 编译后
+'use strict';
+
+var _values = require('babel-runtime/core-js/object/values');
+
+var _values2 = _interopRequireDefault(_values);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+onsole.log((0, _values2.default)({ 1: 2 }));
+```
+
+另外，它还有几个配置
+
+```
+// 默认值
+{
+  "plugins": [
+    ["transform-runtime", {
+      "helpers": true,
+      "polyfill": true,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }]
+  ]
+}
+```
+
+如果你只需要用 regenerator，不需要 core-js 里面的 polyfill 那你就可以在 options 中把 polyfill 设为 false。helpers 设为 false，就相当于没有启用 `babel-plugin-external-helpers` 的效果，比如翻译 async 的时候，用到了 asyncToGenerator 函数，每个文件还会重新定义一下。moduleName 的话，就是用到的库，你可以把 babel-runtime 换成其他类似的。
+
 ### 简单的小例子（全局安装与本地安装）
+
+------
 
 尽管你可以把 Babel-cli 全局安装在你的机器上，但是按项目逐个安装在本地会更好。
 

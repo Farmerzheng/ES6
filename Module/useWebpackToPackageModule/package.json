@@ -1,0 +1,19 @@
+{
+    "name": "usewebpacktopackagemodule",
+    "version": "1.0.0",
+    "description": "将 Plane.js 、EnemyPlane.js 、MyPlane.js 和 index.js 文件打包成一个能在浏览器当中运行的js文件",
+    "main": "index.js",
+    "scripts": {
+        "test01": "webpack"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "babel": "^6.23.0",
+        "babel-cli": "^6.24.1",
+        "babel-core": "^6.24.1",
+        "babel-loader": "^7.0.0",
+        "babel-preset-es2015": "^6.24.1",
+        "webpack": "^2.6.1"
+    }
+}
