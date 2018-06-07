@@ -111,7 +111,7 @@ package.json 的作用？
 
 优先采用本地安装包（尽量不要把包全局安装）
 
-package.json 当中依赖的包
+package.json 当中依赖的包（npm init）
 
 包的功能解释：
 
@@ -148,22 +148,7 @@ package.json 当中依赖的包
         "es2015"
     ]
 }
-
 ```
-
-
-
-
-
-
-
-将webpack作为项目的开发依赖安装：
-
-> npm install --save-dev webpack 
-
-
-
-
 
 
 
@@ -289,6 +274,16 @@ dist  文件夹下面有一个bundle.js
 
             1. 让浏览器去执行（新建一个index.html，引入bundle.js）
             2. 在 node 平台上执行 bundle.js ( node dist/bundle.js)
+
+## 第六步：将打包后的代码扔给后台
+
+哪个代码扔给后台？
+
+index.html 和 dist 文件夹
+
+
+
+
 
   
 

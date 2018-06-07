@@ -358,11 +358,13 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 ```
 
-#### 文件结构：
+##### 文件结构：
+
+
 
 ![文件结构](https://segmentfault.com/img/remote/1460000011164344)
 
-#### 使用
+##### 使用
 
 可以单独引入`require('babel-runtime/core-js/object/values');`
 
