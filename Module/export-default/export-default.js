@@ -10,7 +10,14 @@
 // 正确
 // export default 42;
 
+
 export default function() {
     console.log('foo');
 }
+
+// export default {
+//     name:'zhangsan',
+//     age:18
+// }
+
 // 为模块指定默认输出

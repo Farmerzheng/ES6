@@ -1,4 +1,10 @@
 import customName from './export-default';
+
+// import zhangsan from './export-default'
+
+// var default = {name:'zhangsan',age:18}
+// export default;
+
 customName(); // 'foo'
 // 对export default输出的模块，
 // import命令可以为该匿名函数指定任意名字。

@@ -429,10 +429,14 @@ node index.js
 
 #### babel-plugin-transform-runtime
 
-上面我们知道，transform-runtime 是为了方便使用 babel-runtime 的，它会分析我们的 ast 中，是否有引用 babel-rumtime 中的垫片（通过映射关系），如果有，就会在当前模块顶部插入我们需要的垫片。试一下：
+上面我们知道，transform-runtime 是为了方便使用 babel-runtime 的，
+
+它会分析我们的 ast 中，是否有引用 babel-rumtime 中的垫片（通过映射关系），
+
+如果有，就会在当前模块顶部插入我们需要的垫片。试一下：
 
 ```
-npm install babel-plugin-transform-runtime
+npm install --save-dev babel-plugin-transform-runtime
 ```
 
 ```
@@ -473,9 +477,175 @@ onsole.log((0, _values2.default)({ 1: 2 }));
 }
 ```
 
-如果你只需要用 regenerator，不需要 core-js 里面的 polyfill 那你就可以在 options 中把 polyfill 设为 false。helpers 设为 false，就相当于没有启用 `babel-plugin-external-helpers` 的效果，比如翻译 async 的时候，用到了 asyncToGenerator 函数，每个文件还会重新定义一下。moduleName 的话，就是用到的库，你可以把 babel-runtime 换成其他类似的。
+如果你只需要用 regenerator，
 
-### 简单的小例子（全局安装与本地安装）
+不需要 core-js 里面的 polyfill 那你就可以在 options 中把 polyfill 设为 false。
+
+helpers 设为 false，
+
+就相当于没有启用 `babel-plugin-external-helpers` 的效果，
+
+比如翻译 async 的时候，
+
+用到了 asyncToGenerator 函数，
+
+每个文件还会重新定义一下。
+
+moduleName 的话，
+
+就是用到的库，
+
+你可以把 babel-runtime 换成其他类似的。
+
+#### transform-runtime 对比 babel-polyfill
+
+其实通过上面的介绍我们已经了解他们是干什么的了，
+
+这里再稍微总结区分一下吧。
+
+我在这里把 babel-runtime 和 babel-plugin-transform-runtime 
+
+统称为 transform-runtime，因为一起用才比较好。
+
+> babel-polyfill 是当前环境注入这些 es6+ 标准的垫片，
+>
+> 好处是引用一次，不再担心兼容，
+>
+> 而且它就是全局下的包，代码的任何地方都可以使用。
+>
+> 缺点也很明显，
+>
+> 它可能会污染原生的一些方法而把原生的方法重写。
+>
+> 如果当前项目已经有一个 polyfill 的包了，
+>
+> 那你只能保留其一。
+>
+> 而且一次性引入这么一个包，
+>
+> 会大大增加体积。
+>
+> 如果你只是用几个特性，就没必要了，
+>
+> 如果你是开发较大的应用，
+>
+> 而且会频繁使用新特性并考虑兼容，那就直接引入吧。
+
+
+
+
+
+> transform-runtime 是利用 plugin 自动识别并替换代码中的新特性，
+
+> 你不需要再引入，
+>
+> 只需要装好 babel-runtime 和 配好 plugin 就可以了。
+>
+> 好处是按需替换，检测到你需要哪个，
+>
+> 就引入哪个 polyfill，
+>
+> 如果只用了一部分，
+>
+> 打包完的文件体积对比 babel-polyfill 会小很多。
+>
+> 而且 transform-runtime 不会污染原生的对象，方法，
+>
+> 也不会对其他 polyfill 产生影响。
+>
+> 所以 transform-runtime 的方式更适合开发工具包，库，
+>
+> 一方面是体积够小，
+>
+> 另一方面是用户（开发者）不会因为引用了我们的工具，
+>
+> 包而污染了全局的原生方法，产生副作用，
+>
+> 还是应该留给用户自己去选择。
+>
+> 缺点是随着应用的增大，
+>
+> 相同的 polyfill 每个模块都要做重复的工作（检测，替换），
+>
+> 虽然 polyfill 只是引用，编译效率不够高效。
+>
+> 值得注意的是，
+>
+> instance 上新添加的一些方法，
+>
+> babel-plugin-transform-runtime 是没有做处理的，
+>
+> 比如 数组的 includes, filter, fill 等，
+>
+> 这个算是一个关键问题吧，
+>
+> 直接推荐用 polyfill。
+
+> 另外，
+>
+> 关于 babel-runtime 为什么是 dependencies 依赖。
+>
+> 它只是一个集中了 polyfill 的 library，
+>
+> 对应需要的 polyfill 都是要引入项目中，
+>
+> 并跟项目代码一起打包的。
+>
+> 不过它不会都引入，
+>
+> 你用了哪个，
+>
+> plugin 就给你 require 哪个。
+>
+> 所以即使你最终项目只是 
+>
+> `require('babel-runtime/core-js/object/values')`其中的一个文件，
+>
+> 但是对于这包来说，也是生产依赖的。
+
+![img](https://segmentfault.com/img/remote/1460000011245833)
+
+注意：
+
+babel-polyfill 并不是一定会污染全局环境，
+
+在引入这个 js，并运行的时候，
+
+它会先判断当前有没有这个方法，
+
+再看要不要重写。如上图
+
+
+
+### presets
+
+各种配置 plugin 实在是费劲，es6+ 编译要加入好多 plugins，比如为了在 node 中使用 esmodule，要把 esmodule 转化成 commomjs，使用 `transform-es2015-modules-commonjs`，还有 asyncToGenerator，React jsx转化等等，不仅要装好多，还要配好多。
+
+presets 就是 plugins 的组合，你也可以理解为是套餐... 主要有
+
+- [env](https://babeljs.io/docs/plugins/preset-env/)
+- [es2015](https://babeljs.io/docs/plugins/preset-es2015/)
+- [react](https://babeljs.io/docs/plugins/preset-react/)
+- [lastet](https://babeljs.io/docs/plugins/preset-latest/)
+- [stage-x](https://babeljs.io/docs/plugins/#presets-stage-x-experimental-presets-) 具体的语法属于哪个 stage 可参照[tc39](https://github.com/tc39/proposals)
+
+大部分的 presets 我觉得都不需要介绍了，官网上写的比较详细。而且 babel-preset-lastet 已经废弃，被 babel-preset-env 代替。
+
+#### babel-preset-env
+
+这个 preset 真是神器啊，
+
+它能根据当前的运行环境，
+
+自动确定你需要的 plugins 和 polyfills。
+
+通过各个 es标准 feature 在不同浏览器以及 node 版本的支持情况，
+
+再去维护一个 feature 跟 plugins 之间的映射关系，
+
+最终确定需要的 plugins。
+
+### example(save&global)
 
 ------
 
@@ -489,7 +659,7 @@ onsole.log((0, _values2.default)({ 1: 2 }));
 
 
 
-#### 全局安装
+#### install-global
 
 1. `npm init`  初始化项目,生成项目的配置文件package.json
 
@@ -529,7 +699,7 @@ onsole.log((0, _values2.default)({ 1: 2 }));
    >
    >   将src文件夹下的所有文件输出到lib文件夹下
 
-#### 本地安装
+#### install-save-dev
 
 1. 1.测试本地安装的babel-cli包，需要先卸载全局的babel-cli包 
 
@@ -597,7 +767,7 @@ onsole.log((0, _values2.default)({ 1: 2 }));
 
 
 
-### 常用 babel 命令
+### babel  command
 
 ---
 
