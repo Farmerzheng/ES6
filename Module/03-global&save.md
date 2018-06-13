@@ -9,7 +9,39 @@
    >npm install --save-dev 包名
 
 
+
+###  模块规范
+
+#### ES6 的模块规范
+
++ 引入模块  
+
+  > import  { Plane }  from './Plane'
+  >
+  > import Plane from './Plane'    (导入默认模块)
+
+   默认导出与默认导入要配合使用          
+
++ 导出模块 
+
+  > export  {Plane}
+  >
+  > export  default  Plane (导出默认模块)
+
+#### CommonJS 规范
+
+ node.js 中的模块规范就是 CommonJS 规范
+
++ 导入模块
+
+  > let plane = require('./Plane')
+
++ 导出模块
+
+  > module.exports = Plane
+
 ### 全局安装与本地安装的不同点？
+
 ---
 1. 是否注册环境变量？
 
@@ -20,7 +52,7 @@
 
  * 全局安装是安装在操作系统上面
  * 本地安装安装在了node_modules 文件夹底下
- 
+
 3. package.json 是否发生变化？
  * 全局安装的包 package.json不会发生变化
  * 本地安装的包会改变package.json的  "dependencies"、"devDependencies" 配置
@@ -46,7 +78,12 @@
 
 4. 是否可以通过 require 命令引用模块
  * 全局安装不能通过require命令引用模块
+
  * 本地装可以通过require命令引用模块
+
+   ####  
+
+   #### 
 
 ### 局部安装的两种方式的区别
  * 作为项目的依赖安装
@@ -106,9 +143,9 @@ node_modules 文件夹里面存放着所有的局部安装的包（包括开发�
 node_modules 文件夹在安装`第一个包`的时候会自动创建
 以后安装的`局部包`都会放在node_modules文件夹下
 ```
-  
 
-    
+
+​    
 
 
 

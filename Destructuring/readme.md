@@ -139,12 +139,47 @@ let wanglaoshi = {
 方法一：
   wanglaoshi.girlFriends[2].sex
 
+方法二：
+
+ let {
+      name,
+      age,
+      girlFriends:[
+                    dongfan,
+                    shuyu,
+                    {
+                       name:kaixuanName,
+                       age:kaixuanAge,
+                       sex:kaixuanSex
+                    }
+                   ]
+      } = wanglaoshi
+      
 
 ```
 
+#### 解构实例
 
+```
+利用对象解构修改如下代码：
 
+function Person(obj){
+    this.name = obj.name;
+    this.age = obj.age;
+    this.speed = obj.speed;
+}
+new Person({name:'zhangsan',age:18,speed:'100km'});
 
+修改为：
+
+function Person({name,age,speed}){
+    this.name = name;
+    this.age = age;
+    this.speed = speed;
+}
+new Person({name:'zhangsan',age:18,speed:'100km'});
+
+```
 
 
 
