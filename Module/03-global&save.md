@@ -35,6 +35,14 @@
 + 导入模块
 
   > let plane = require('./Plane')
+  >
+  > 如果导入的模块在 node_modules文件夹
+  >
+  > 下面（在npm服务器安装的模块）
+  >
+  > 无需写路径，直接写包名就可以了 ,
+  >
+  > 例如  let webpack  = require('webpack')
 
 + 导出模块
 
@@ -55,7 +63,8 @@
 
 3. package.json 是否发生变化？
  * 全局安装的包 package.json不会发生变化
- * 本地安装的包会改变package.json的  "dependencies"、"devDependencies" 配置
+ * 本地安装的包会改变package.json的  "dependencies"、
+ * "devDependencies" 配置
 
   ```
   /*package.json*/
@@ -94,12 +103,23 @@
   ```   
     `--save` 和 `-- save-dev`     
     --save 作为项目依赖（项目上线的时候也会用到这个包）
-    --save-dev 作为项目的开发依赖（项目开发的时候用到这个包，项目上线以后就不用这个包了）
+    --save-dev 作为项目的开发依赖（项目开发的时候用到这个包，
+    项目上线以后就不用这个包了）
   ```
 
-### 程序(包)注册到系统的环境变量当中有什么好处？
+### 模块(包)注册到系统的环境变量当中有什么好处？
 ---
->在命令行窗口中，可以在任意文件夹下使用程序提供的命令，例如我们全局安装了webpack包，那么在` D:\H5\ES6>` 路径下可以使用 `webpack`命令也可以在 `D:\H5`路径下可以使用 `webpack`命令
+>在命令行窗口中，
+>
+>可以在任意文件夹下使用程序提供的命令，
+>
+>例如我们全局安装了webpack包，
+>
+>那么在` D:\H5\ES6>` 路径下可以使用
+>
+> `webpack`命令也可以在
+>
+> `D:\H5`路径下可以使用 `webpack`命令
 
 
 ### 如何查看安装程序的环境变量？
@@ -137,11 +157,12 @@
 会搜索 package.json所有的依赖包并下载
 ```
 ```
-将webpack作为项目依赖下载到 node_modules 文件夹下
-node_modules 文件夹里面存放着所有的局部安装的包（包括开发依赖的包和项目依赖的包）
+node_modules 文件夹里面存放着所有的局部安装的包
+（包括开发依赖的包和项目依赖的包）
 
 node_modules 文件夹在安装`第一个包`的时候会自动创建
-以后安装的`局部包`都会放在node_modules文件夹下
+
+以后安装的`node包`都会放在node_modules文件夹下
 ```
 
 
