@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="js/require.js"></script>
+    <script type="text/javascript">
+        require.config({
+            paths: {
+                "jquery": ["js/jQuery"],
+                "a": "js/a"
+            }
+        });
+        require(["jquery", "a"], function($) {
+            $(function() {
+                alert("load finished");
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <span>body</span>
+</body>
+
+</html>

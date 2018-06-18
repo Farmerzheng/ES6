@@ -1,0 +1,15 @@
+{
+  "name": "demo-require",
+  "version": "1.0.0",
+  "description": "",
+  "main": "a.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browsersync": "0.0.1-security"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

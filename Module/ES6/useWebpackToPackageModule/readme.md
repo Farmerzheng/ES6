@@ -4,8 +4,6 @@
 
 
 
-
-
 # 此项目的开发步骤
 
 ## 第一步:创建模块文件
@@ -29,12 +27,22 @@ class Plane {
 }
 
 export {Plane}
+//默认导出
+// export default Plane
+
+//commonJS
+// module.exports = Plane
 ```
 
 ```/*EnemyPlane.js*/
 /*EnemyPlane.js*/
 
 import {Plane} from './Plane'
+//默认导入
+//import Plane from './Plane'
+
+//commonJS
+// let Plane = require('./Plane')
 
 class EnemyPlane extends Plane{
     constructor(bg, size, position,speed){
@@ -47,11 +55,24 @@ class EnemyPlane extends Plane{
 }
 
 export { EnemyPlane}
+
+//默认导出
+//export default EnemyPlane
+
+//commonJS
+// module.exports = EnemyPlane
 ```
 
 ```
 /*MyPlane.js*/
 import {Plane} from './Plane'
+
+//默认导入
+// import Plane from './Plane'
+
+//commonJS
+// let Plane = require('./Plane');
+
 
 class MyPlane extends Plane{
     constructor(bg, size, position,direct){
@@ -63,12 +84,27 @@ class MyPlane extends Plane{
     }
 }
 export {MyPlane}
+// 默认导出
+// export default MyPlane
+
+//commonJS
+//module.exports = MyPlane
 ```
 
 ```
 /*index.js*/
+
 import {EnemyPlane} from './EnemyPlane'
 import {MyPlane} from './MyPlane'
+
+//默认导入
+//import EnemyPlane from './EnemyPlane'
+//import MyPlane from './MyPlane'
+
+//commonJS 规范导入
+//let EnemyPlane = require('./EnemyPlane')
+//let MyPlane = require('./MyPlane')
+
 
 let enemyPlane = new EnemyPlane('color', 18, 'left',1000)
 
@@ -83,13 +119,13 @@ myPlane.shoot()
 
 ## 第二步：初始化项目（npm init）
 
-在项目的根目录下执行npm init
+`在项目的根目录下`   执行npm init
 
 因为我们这个项目要想运行起来，需要webpack对
 
 Plane.js 、EnemyPlane.js 、MyPlane.js 和 index.js
 
-进行打包，也就是说项目开发的时候需要 node包（webpack）
+进行打包，也就是说项目开发的时候需要 webpack包
 
 **开发的时候只要需要node包 ,我们就要 执行npm init  来生成一个package.json文件**
 
@@ -109,7 +145,7 @@ package.json 的作用？
 
 安装：全局安装和本地安装
 
-优先采用本地安装包（尽量不要把包全局安装）
+优先采用本地安装（尽量不要把包全局安装）
 
 package.json 当中依赖的包（npm init）
 
@@ -117,12 +153,24 @@ package.json 当中依赖的包（npm init）
 
   webpack包 ： 打包js文件的
 
-  babel***包 ： 将ES6转换成ES5用的
+  babel***包 ： 将ES6转换成ES5
 
-  特别强调：只要用到 babel相关的包 ,就需要在项目的根目录下创建   .babelrc 文件
+  特别强调：只要用到 babel相关的包 ,就需要在项目的根目录下创建  `.babelrc `文件
 
 ```
-    "devDependencies": {
+/*.babelrc*/
+
+{
+    "presets": [
+        "es2015"
+    ]
+}
+```
+
+package.json中的依赖包
+
+```
+  "devDependencies": {
 
         "babel": "^6.23.0",
 
@@ -137,38 +185,23 @@ package.json 当中依赖的包（npm init）
         "webpack": "^2.6.1"
 
     }
-
-```
-
-```
-/*.babelrc*/
-
-{
-    "presets": [
-        "es2015"
-    ]
-}
 ```
 
 
 
 昨天的错误？
 
-在webpack.config.js 中 loaders 字段报错了
-
-
+>  在webpack.config.js 中 loaders 字段报错了
 
 报错原因？
 
-在webpack 1 中 webpack.config.js 中是  loaders 字段
-
-在webpack2 中 webpack.config.js 中变成了 rules  字段
-
-
+> 在webpack 1 中 webpack.config.js 中是  loaders 字段
+>
+> 在webpack2 中 webpack.config.js 中变成了 rules  字段
 
 总结：
 
-​           1、项目如果依赖全局包，那么这个项目的可移植性便差了
+​           1、项目如果依赖全局包，那么这个项目的`可移植性`便差了
 
 ​           2、同一台电脑当中，不同项目，若依赖相同的包，但是包版本不同，可能有些项目无法运行
 
@@ -176,39 +209,47 @@ package.json 当中依赖的包（npm init）
 
 ​             第一个例子：
 
-​             曹杰的电脑的操作系统当中安装的是 webpack 1（  loaders ）
-
-​             董帆的电脑的操作系统当中安装的是 webpack 2  ( rules )
-
-​             曹杰的webpack项目在他自己的电脑上运行良好
-
-​             曹杰的webpack项目拷贝给董帆，董帆执行同样的命令，能运行么？
-
-​             不能运行，因为曹杰项目中的webpack.config.js中是loaders字段，loaders字段只有
-
-​             webpack1  能够识别，webpack 2 识别不了 loaders 字段
+> ​             曹杰的电脑的操作系统当中安装的是 webpack 1（  loaders ）
+>
+> ​             董帆的电脑的操作系统当中安装的是 webpack 2  ( rules )
+>
+> ​             曹杰的webpack项目在他自己的电脑上运行良好
+>
+> ​             曹杰的webpack项目拷贝给董帆，董帆执行同样的命令，能运行么？
+>
+> ​             不能运行，因为曹杰项目中的webpack.config.js中是loaders字段，loaders字段只有
+>
+> ​             webpack1  能够识别，webpack 2 识别不了 loaders 字段
+>
 
 
 
 ​            第二个例子：
 
-​            葛松伟的电脑当中现在有两个项目 demo-01 和 demo-02
-
-​             demo-01  项目依赖 webpack1
-
-​             demo-02  项目依赖  webpack2
-
-​             现在葛松伟的电脑当中全局安装了webpack1
-
-​             执行 webpack命令能运行对demo-02  项目的js文件打包么？
-
-​             不能，原因是demo-02 中的webpack.config.js中的rules字段不能被
-
-​              webpack1识别
+> ​            葛松伟的电脑当中现在有两个项目 demo-01 和 demo-02
+>
+> ​             demo-01  项目依赖 webpack1
+>
+> ​             demo-02  项目依赖  webpack2
+>
+> ​             现在葛松伟的电脑当中全局安装了webpack1
+>
+> ​             执行 webpack命令能运行对demo-02  项目的js文件打包么？
+>
+> ​             不能，原因是demo-02 中的webpack.config.js中的rules字段不能被
+>
+> ​              webpack1识别
+>
 
 ## 第四步：webpack.config.js
 
-项目如果用到了webpack包，那么必须在项目的根目录下创建 webpack.confiig.js
+项目如果用到了webpack包，那么须要在项目的根目录下创建 webpack.config.js
+
+创建了webpack.config.js 后  你只需要运行命令  `webpack`
+
+如果要是不创建webpack.config.js呢？
+
+我们运行的命令可能就会是：`webpack entry ./js/index.js --outfile dist/bundle.js loaders 'babel-loader'`
 
 ```
 var webpack = require("webpack");
@@ -234,15 +275,13 @@ module.exports = {
 
   ## 第五步：执行webpack 当中的打包命令
 
-如果webpack  是全局安装的，那么我们可以直接执行 'webpack' 命令就行了
-
-
+如果webpack  是全局安装的，那么我们可以直接执行 'webpack' 命令就行了（需要在根目录下）
 
 局部安装的包如何执行包内的命令呢？
 
-方法一：命令前面要写上包安装的路径
+​方法一：命令前面要写上包安装的路径      
 
-​      node_modules/.bin/webpack
+> node_modules/.bin/webpack
 
 方法二 ：利用 npm run
 
@@ -250,19 +289,15 @@ module.exports = {
 
 ```
     "scripts": {
-
-        "test01": "webpack"        
-
-    }
+        "test01": "webpack"  // 千万不要写成 node_modules/.bin/webpack   
+     }
     /* 
        test01 是自定义的命令
-       webpack 是具体的打包命令（注意这个命令和全局安装是运行的命令一样）
+       webpack 是具体的打包命令（注意这个命令和全局安装运行的命令一样）
     */
 ```
 
 ​    在命令行执行  `npm run test01`
-
-
 
 
 
@@ -274,6 +309,7 @@ dist  文件夹下面有一个bundle.js
 
             1. 让浏览器去执行（新建一个index.html，引入bundle.js）
             2. 在 node 平台上执行 bundle.js ( node dist/bundle.js)
+               如果在dist 文件夹下，执行的命令应该是：node bundle.js
 
 ## 第六步：将打包后的代码扔给后台
 
