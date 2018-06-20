@@ -131,7 +131,7 @@ node解析的是服务器程序
 
 >    hybird app: 用 html、css、javascript编写
 >
->   facebook 在 2015年的时候退出了一个开发hybird app的js框架 : react native
+>   facebook 在 2015年的时候推出了一个开发hybird app的js框架 : react native
 
 > 随着手机硬件的不断升级，
 >

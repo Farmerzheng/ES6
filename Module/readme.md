@@ -1,6 +1,16 @@
-# 1-1 前端的发展
+# 前端的发展
 
-近年来 Web 应用变得更加复杂与庞大，Web 前端技术的应用范围也更加广泛。 从复杂庞大的管理后台到对性能要求苛刻的移动网页，再到类似 ReactNative 的原生应用开发方案，Web 前端工程师在面临更多机遇的同时也会面临更大的挑战。 通过直接编写 JavaScript、CSS、HTML 开发 Web 应用的方式已经无法应对当前 Web 应用的发展。近年来前端社区涌现出许多新思想与框架，下面将一一介绍它们。
+近年来 Web 应用变得更加复杂与庞大，Web 前端技术的应用范围也更加广泛。 
+
+从复杂庞大的管理后台到对性能要求苛刻的移动网页，
+
+再到类似 React Native 的原生应用开发方案，
+
+Web 前端工程师在面临更多机遇的同时也会面临更大的挑战。 
+
+通过直接编写 JavaScript、CSS、HTML 开发 Web 应用的方式已经无法应对当前 Web 应用的发展。
+
+近年来前端社区涌现出许多新思想与框架，下面将一一介绍它们。
 
 ## 模块化
 
@@ -16,7 +26,13 @@
 
 ### CommonJS
 
-[CommonJS](http://www.commonjs.org/) 是一种使用广泛的 JavaScript 模块化规范，核心思想是通过 `require` 方法来`同步`地加载依赖的其他模块，通过 `module.exports` 导出需要暴露的接口。 CommonJS 规范的流行得益于 Node.js 采用了这种方式，后来这种方式被引入到了网页开发中。
+[CommonJS](http://www.commonjs.org/) 是一种使用广泛的 JavaScript 模块化规范，
+
+核心思想是通过 `require` 方法来`同步`地加载依赖的其他模块，通过 `module.exports` 导出需要暴露的接口。 
+
+CommonJS 规范的流行得益于 Node.js 采用了这种方式，
+
+后来这种方式被引入到了网页开发中。
 
 采用 CommonJS 导入及导出时的代码如下：
 
@@ -30,38 +46,137 @@ module.exports = moduleA.someFunc;
 
 CommonJS 的优点在于：
 
--   代码可复用于 Node.js 环境下并运行，例如做同构应用（什么是前后端同构呢？就是前后端都可以使用同一套代码生成页面，页面既可以由前端动态生成，也可以由后端服务器直接渲染出来 ）；
--   通过 NPM 发布的很多第三方模块都采用了 CommonJS 规范。
+- 代码可复用于 Node.js 环境下并运行，
+
+- 例如做同构应用
+
+  （什么是前后端同构呢？就是前后端都可以使用同一套代码生成页面，页面既可以由前端动态生成，也可以由后端服务器直接渲染出来 ）；
+
+- 通过 NPM 发布的很多第三方模块都采用了 CommonJS 规范。
 
 CommonJS 的缺点在于这样的代码无法直接运行在浏览器环境下，必须通过工具转换成标准的 ES5。
 
 > CommonJS 还可以细分为 CommonJS1 和 CommonJS2，区别在于 CommonJS1 只能通过 `exports.XX = XX` 的方式导出，CommonJS2 在 CommonJS1 的基础上加入了 `module.exports = XX`的导出方式。 CommonJS 通常指 CommonJS2。
 
-### AMD
+### AMD(require.js)
 
-[AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) 也是一种 JavaScript 模块化规范，与 CommonJS 最大的不同在于它采用`**异步**`的方式去加载依赖的模块。 AMD 规范主要是为了解决针对浏览器环境的模块化问题，最具代表性的实现是 [requirejs](http://requirejs.org/)（RequireJS是一个非常小巧的JavaScript模块载入框架，是AMD规范最好的实现者之一 ）。
+[AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) 也是一种 JavaScript 模块化规范，
 
-采用 AMD 导入及导出时的代码如下：
+与 CommonJS 最大的不同在于它采用`异步`的方式去加载依赖的模块。
+
+ AMD 规范主要是为了解决针对浏览器环境的模块化问题，
+
+最具代表性的实现是 [requirejs](http://requirejs.org/)
+
+Require.js是一个非常小巧的JavaScript模块载入框架，是AMD规范最好的实现者之一 
+
+#### require.js例子
+
+#####  1. 下载require.js
+
+##### 2.创建项目目录
+
+![1529482539223](C:\Users\王争\AppData\Local\Temp\1529482539223.png)
+
+##### 3. 创建文件 
+
+  alert.js
 
 ```
-// 定义一个模块
-define('module', ['dep'], function(dep) {
-  return exports;
-});
-
-// 导入和使用
-require(['module'], function(module) {
-});
+// 弹框效果模块
+define(function() {
+    $('#btn').on('click', function() {
+        alert('王老师上课不讲课，带着学生看视频，结果被办公室某些老湿告状了！！！')
+    })
+})
 ```
 
-AMD 的优点在于：
+index.html
 
--   可在不转换代码的情况下直接在浏览器中运行；
--   可异步加载依赖；
--   可并行加载多个依赖；
--   代码可运行在浏览器环境和 Node.js 环境下。
+```
+<!DOCTYPE html>
+<html>
 
-AMD 的缺点在于 JavaScript 运行环境没有原生支持 AMD，需要先导入实现了 AMD 的库后才能正常使用。
+<head>
+    <script type="text/javascript" src="src/js/require.js"></script>
+    <script type="text/javascript">
+    
+        //指明模块的路径
+        require.config({
+            paths: {
+                "jquery": "src/js/jQuery",
+                "alert": "src/js/alert",
+                "tab": "src/js/tab",
+                "carousel": "src/js/carousel"
+            }
+        });
+
+        //引入模块
+        require(["jquery"], function() {
+            //以下模块依赖jQuery
+            require(["alert"]);
+            require(["carousel"]);
+            require(["tab"]);
+        })
+    </script>
+</head>
+
+<body>
+    <span>body</span>
+    <button id='btn'>按钮</button>
+</body>
+
+</html>
+```
+
+
+
+##### 4.运行html文件
+
+右击index-01.html---》在浏览器打开---》报错，错误代码如下
+
+```
+require.js:2420 Failed to load file:///D:/H5/ES6/Module/AMD/demo-require.js/js/a.js: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.
+```
+
+通过代码分析，我们得到结论？
+
+要在服务器环境下运行 index-01.html
+
+> npm init
+>
+> npm install browsersync --save-dev
+>
+> browser-sync   start   --server
+
+​    
+
+
+
+AMD规范 的优点在于：
+
+- 可在不转换代码的情况下直接在浏览器中运行；
+
+    commonJS 规范和 ES6模块规范 浏览器不能直接运行，需要编译打包才行
+
+- 可异步加载依赖；
+
+- 可并行加载多个依赖；
+
+   ```
+      //以下模块依赖jQuery
+      require(["alert"]);
+      require(["carousel"]);
+      require(["tab"]);
+      
+      同时下载三个模块，不是一个下载完成后再下载另一个
+   ```
+
+  
+
+AMD 的缺点在于 JavaScript 运行环境没有原生支持 AMD，
+
+需要先导入实现了 AMD 的库（require.js）后才能正常使用。
 
 ### ES6 模块化
 
@@ -84,7 +199,11 @@ ES6 模块虽然是终极模块化方案，但它的缺点在于目前无法直�
 
 ### 样式文件中的模块化
 
-除了 JavaScript 开始模块化改造，前端开发里的样式文件也支持模块化。 以 LESS 为例，把一些常用的样式片段放进一个通用的文件里，再在另一个文件里通过 `@import` 语句去导入和使用这些样式片段。
+除了 JavaScript 开始模块化改造，前端开发里的样式文件也支持模块化。 
+
+以 LESS 为例，把一些常用的样式片段放进一个通用的文件里，
+
+再在另一个文件里通过 `@import` 语句去导入和使用这些样式片段。
 
 ```
 @import "lib.less";
@@ -171,10 +290,29 @@ ECMAScript 6.0（简称 ES6）是 JavaScript 语言的下一代标准。它在�
 
 ### TypeScript
 
-[TypeScript](https://www.typescriptlang.org/) 是 JavaScript 的一个超集，由 Microsoft 开发并开源，除了支持 ES6 的所有功能，还提供了静态类型检查。采用 TypeScript 编写的代码可以被编译成符合 ES5、ES6 标准的 JavaScript。 将 TypeScript 用于开发大型项目时，其优点才能体现出来，因为大型项目由多个模块组合而成，不同模块可能又由不同人编写，在对接不同模块时静态类型检查会在编译阶段找出可能存在的问题。 TypeScript 的缺点在于语法相对于 JavaScript 更加啰嗦，并且无法直接运行在浏览器或 Node.js 环境下。
+[TypeScript](https://www.typescriptlang.org/) 是 JavaScript 的一个超集，
+
+由 Microsoft 开发并开源，
+
+除了支持 ES6 的所有功能，还提供了静态类型检查。
+
+采用 TypeScript 编写的代码可以被编译成符合 ES5、ES6 标准的 JavaScript。
+
+ 将 TypeScript 用于开发大型项目时，其优点才能体现出来，
+
+因为大型项目由多个模块组合而成，
+
+不同模块可能又由不同人编写，
+
+在对接不同模块时静态类型检查会在编译阶段找出可能存在的问题。
+
+ TypeScript 的缺点在于语法相对于 JavaScript 更加啰嗦，
+
+并且无法直接运行在浏览器或 Node.js 环境下。
 
 ```
 // 静态类型检查机制会检查传给 hello 函数的数据类型
+
 function hello(content: string) {
   return `Hello, ${content}`;
 }
@@ -184,7 +322,13 @@ hello(content);
 
 ### Flow
 
-[Flow](https://flow.org/) 也是 JavaScript 的一个超集，它的主要特点是为 JavaScript 提供静态类型检查，和 TypeScript 相似但更灵活，可以让你只在需要的地方加上类型检查。
+[Flow](https://flow.org/) 也是 JavaScript 的一个超集，
+
+它的主要特点是为 JavaScript 提供静态类型检查，
+
+和 TypeScript 相似但更灵活，
+
+可以让你只在需要的地方加上类型检查。
 
 ### LESS
 

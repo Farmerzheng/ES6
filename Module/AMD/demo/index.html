@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="src/js/require.js"></script>
+    <script type="text/javascript">
+        //指明模块的路径
+        require.config({
+            paths: {
+                "jquery": "src/js/jQuery",
+                "alert": "src/js/alert",
+                "tab": "src/js/tab",
+                "carousel": "src/js/carousel"
+            }
+        });
+
+        //引入模块
+        require(["jquery"], function() {
+            //以下模块依赖jQuery
+            require(["alert"]);
+            require(["carousel"]);
+            require(["tab"]);
+        })
+    </script>
+</head>
+
+<body>
+    <span>body</span>
+    <button id='btn'>按钮</button>
+</body>
+
+</html>
