@@ -112,7 +112,7 @@ Presets  and  Plugins  的区别？
 它也没有转换 ES5 代码的功能,
 还需要安装相应的插件
 
-![1529458618689](C:\Users\王争\AppData\Local\Temp\1529458618689.png)
+![1529458618689](images\1529458618689.png)
 
 为了方便对插件进行管理，
 Babel 提供了它自己的配置文件 .babelrc,
@@ -123,7 +123,7 @@ Babel 提供了它自己的配置文件 .babelrc,
 
 >  管理插件
 
-![1529458420379](C:\Users\王争\AppData\Local\Temp\1529458420379.png)
+![1529458420379](images\1529458420379.png)
 
 
 
